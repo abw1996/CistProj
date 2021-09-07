@@ -1,0 +1,155 @@
+.header-text {
+    font-family: Bookman, URW Bookman L, serif;
+    font-weight: 600;
+    font-size: 100px;
+    color: black;
+    text-shadow: 4px 10px lightpink;
+}
+
+.prettify-box {
+    background-color: rgba(255, 182, 193, 0.2);
+    border-radius: 100px;
+    border:lightpink;
+    border: 5px;
+}
+
+.prettify-box-blue {
+    background-color: rgba(72, 209, 204, 0.2);
+    border-radius: 100px;
+    border:lightpink;
+    border: 5px;
+}
+
+.header-text:hover {
+    color: hotpink;
+    font-weight: 700;
+}
+
+.nav-style{
+    background-color: rgba(72, 209, 204, 0.2);
+    border-radius: 20px;
+}
+
+.nav-style:hover{
+    background-color: rgba(72, 209, 204, 0.5);
+    border-radius: 5px;
+}
+
+.nav-style-2{
+    background-color: rgba(72, 209, 204, 0.2);
+    border-radius: 20px;
+}
+
+.link-style {
+    color:hotpink !important;
+    font-weight: 500;
+}
+
+.link-style:hover {
+    color: black !important;
+    font-weight: 550;
+}
+
+.link-style-2 {
+    color:hotpink;
+    font-weight: 500;
+}
+
+.scissor-left:hover .img-open {
+    visibility: hidden;
+    display: none;
+}
+
+.scissor-right:hover .img-open {
+    visibility: hidden;
+    display: none;
+}
+
+.scissor-left:hover .img-closed {
+    visibility: visible;
+    display: flex;
+}
+
+.scissor-right:hover .img-closed {
+    visibility: visible;
+    display: flex;
+}
+
+.img-closed {
+    visibility: hidden;
+    display: none;
+}
+
+hr {
+    color:plum;
+    height: 1px;
+}
+
+.pinkify {
+    color:hotpink;
+}
+
+hr {
+    background-color:hotpink;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.custom-padding {
+    padding: 70px;
+}
+
+.about-text {
+    font-size: 20px;
+}
+
+.home-page-box-blue{
+    padding: 40px;
+    background-color: rgba(72, 209, 204, 0.2);
+    margin: 10px;
+}
+
+.home-page-box-pink{
+    padding: 40px;
+    background-color: rgba(255, 182, 193, 0.2);
+    margin: 10px;
+}
+
+.pinkify-w-hover{
+    color:hotpink;
+}
+
+.blueify{
+    background-color: rgba(72, 209, 204);
+}
+
+.blueify-w-hover{
+    color: rgba(72, 209, 204);
+}
+
+.home-page-box-pink:hover{
+    background-color: rgba(72, 209, 204, 0.2);
+}
+
+.home-page-box-blue:hover{
+    background-color: rgba(255, 182, 193, 0.2);
+}
+
+.home-page-box-blue:hover .pinkify-w-hover{
+    color: rgba(72, 209, 204);
+}
+
+.home-page-box-pink:hover .blueify-w-hover{
+    color:hotpink;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.background-peonies{
+    background-image: url("../Photos/Watercolor-Peonies.png");
+    background-repeat: repeat;
+}

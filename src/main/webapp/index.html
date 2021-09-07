@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curl Me Crazy</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/site.js" asp-append-version="true"></script> 
+    <script>
+        $(document).ready(function(){
+           
+           $('#Header').load("Header.html");
+           $("#Footer").load("Footer.html");
+        
+        });
+        </script>
+</head>
+<body>
+    <div id="Header"></div>
+    <div class="row">
+        <div class="col-lg-2 background-peonies"></div>
+        <div class="col-lg-8">
+            <a href="AboutSalon.html">
+                <div class="home-page-box-blue">
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <h2 class="pinkify-w-hover">
+                                Learn More About Our Salon
+                            </h2>
+                            <p1 class="pinkify-w-hover">
+                                Find out more about our rates, and the story of where we came from and where we are going!
+                            </p1>
+                        </div>
+                        <div class="col-lg-6">
+                            <img class="img img-fluid" src="Photos/spa-stuff.jpg">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="AboutEmployees.html">
+                <div class="home-page-box-pink">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img class="img img-fluid" src="Photos/spa-stuff-2.jpg">
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <h2 class="blueify-w-hover">
+                                Learn About Our Stylists
+                            </h2>
+                            <p1 class="blueify-w-hover">
+                                Their experience knows no bounds. Learn why you can trust them.
+                            </p1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="MakeAppointment.html">
+                <div class="home-page-box-blue">
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <h2 class="pinkify-w-hover">
+                                Make An Appointment
+                            </h2>
+                            <p1 class="pinkify-w-hover">
+                                You won't regret your decision to trust us with your looks.
+                            </p1>
+                        </div>
+                        <div class="col-lg-6">
+                            <img class="img img-fluid" src="Photos/spa-stuff-3.jpg">
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 background-peonies"></div>
+    </div>      
+</body>
+<footer id="Footer"></footer>
+</html>

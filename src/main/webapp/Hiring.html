@@ -20,8 +20,41 @@
 </head>
 <body>
     <div id="Header"></div>
-    <div class="row">
-        <p1>Hiring Page</p1>
+    <div class="row p-2">
+        <div class="col-lg-6 prettify-box justify-content-center text-center" style="padding: 30px;">
+            <h2 class="blueify">Working For Curl Me Crazy</h2>
+            <p1 class="blueify">
+                Working for Curl Me Crazy requires something special. An X factor if you will.<br>
+                We demand the best from our team members everyday. Will you be up to the task?<br>
+                If you think you have what it takes, send us your resume. You just my be lucky enough to land a spot at the salon.<br>
+                Make sure your resume includes or license info, and at least 3 references and/ past work experience.<br>
+                
+            </p1>
+            
+        </div>
+        <div class="col-lg-6 prettify-box-blue justify-content-center text-center" style="padding: 30px;">
+            <form class="text-center" action="SendHire" name="HireForm" method="post" enctype="multipart/form-data">
+                <label class="hire-form-text">First Name</label> <br>
+                <input class="text-input" name="FirstName" id="FirstName" type="text"><br>
+                <label class="hire-form-text">Last Name</label> <br>
+                <input class="text-input" name="LastName" id="LastName" type="text"><br>
+                <label class="hire-form-text">Email</label> <br>
+                <input class="text-input" name="Email" id="Email" type="text"><br>
+                <label class="hire-form-text-upload resume" for="Resume">Click To Add Resume</label> <br>
+                <input class="hide" name="Resume" id="Resume" type="file"><br>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <label class="hire-form-text align-self-start cursor-on-hover" for="reset">Reset</label>
+                        <input class="hide" name="reset" id="reset" type="reset">
+                    </div>
+                    <div class="col-6">
+                        <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Submit</label>
+                        <input class="hide" name="submit" id="submit" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>      
 </body>
 <footer id="Footer"></footer>

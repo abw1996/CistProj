@@ -122,7 +122,7 @@ body{
 }
 
 .blueify{
-    background-color: rgba(72, 209, 204);
+    color: rgba(72, 209, 204);
 }
 
 .blueify-w-hover{
@@ -152,4 +152,44 @@ a:hover {
 .background-peonies{
     background-image: url("../Photos/Watercolor-Peonies.png");
     background-repeat: repeat;
+}
+
+.hide{
+    display: none;
+}
+
+.hire-form-text{
+    color: hotpink;
+    font: 40px;
+}
+
+.hire-form-text-upload{
+    text-decoration: underline;
+    color: hotpink;
+    font: 40px;
+}
+
+.hire-form-text-upload:hover{
+    color: black;
+}
+
+.text-input{
+    background-color: rgba(255, 182, 193, 0.2);
+    border-color: black;
+    border:5px;
+    border-radius: 20px;
+    height: 40px;
+    width: 300px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.cursor-on-hover:hover{
+    cursor: pointer;
+}
+
+.resume {
+    padding-top: 30px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }

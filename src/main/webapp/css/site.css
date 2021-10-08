@@ -193,3 +193,13 @@ a:hover {
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
+
+@media screen and (max-width: 960px) {
+    .scissor-right {
+        display: none;
+    }
+    
+    .scissor-left {
+        display: none;
+    }
+}

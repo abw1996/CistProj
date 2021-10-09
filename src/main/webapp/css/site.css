@@ -150,7 +150,7 @@ a:hover {
 }
 
 .background-peonies{
-    background-image: url("../Photos/Watercolor-Peonies.png");
+    background-image: url("../Photos/backgroundPattern.png");
     background-repeat: repeat;
 }
 
@@ -186,6 +186,7 @@ a:hover {
 
 .cursor-on-hover:hover{
     cursor: pointer;
+    color: hotpink;
 }
 
 .resume {
@@ -203,3 +204,9 @@ a:hover {
         display: none;
     }
 }
+
+.form-title {
+    color:hotpink;
+    font-size: 40px;
+}
+

@@ -98,4 +98,20 @@ public class Appointment {
         }
     }
     
+    private String getAppointmentID() {
+        return this.appointmentID;
+    }
+    
+    private String getAppointmentDateTime() {
+        return this.apptDateTime;
+    }
+    private String getCustomerID() {
+        return this.customerID;
+    }
+    private String getEmployeeID() {
+        return this.employeeID;
+    }
+    private String getProcedureID() {
+        return this.procedureID;
+    }
 }

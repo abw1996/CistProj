@@ -102,4 +102,28 @@ public class Customer {
             System.out.println("Failed DB connection");
         }
     }
+    
+    private String getCustomerID() {
+        return this.customerID;
+    }
+    
+    private String getFirstName() {
+        return this.firstName;
+    }
+    
+    private String getLastName() {
+        return this.lastName;
+    }
+    
+    private String getEmail() {
+        return this.email;
+    }
+    
+    private String getPassword() {
+        return this.password;
+    }
+    
+    private String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 }

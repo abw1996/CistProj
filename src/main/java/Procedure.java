@@ -84,5 +84,17 @@ public class Procedure {
             System.out.println("Failed DB connection");
         }
     }
+    
+    private String getProcedureID() {
+        return this.procedureID;
+    }
+    
+    private String getProcedureName() {
+        return this.procedureName;
+    }
+    
+    private String getProcedureCost() {
+        return this.procedureCost;
+    }
 
 }

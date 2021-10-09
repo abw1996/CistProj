@@ -1,9 +1,18 @@
+
+
+@font-face {
+    font-family: Swashington;
+    src: url("../Fonts/SwashingtonCP.ttf");
+}
+
+
 .header-text {
-    font-family: Bookman, URW Bookman L, serif;
-    font-weight: 600;
+    font-family: Swashington;
+    font-feature-settings: "swsh" 2;
+   /* font-weight: 600; */
     font-size: 100px;
     color: black;
-    text-shadow: 4px 10px lightpink;
+   /*  text-shadow: 4px 10px lightpink; */
 }
 
 .prettify-box {
@@ -209,4 +218,6 @@ a:hover {
     color:hotpink;
     font-size: 40px;
 }
+
+
 

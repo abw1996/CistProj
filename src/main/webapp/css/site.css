@@ -219,5 +219,9 @@ a:hover {
     font-size: 40px;
 }
 
+.employee-img:hover {
+    border: 5px solid rgba(255, 182, 193);
+}
+
 
 

@@ -97,5 +97,25 @@ public class Employee {
             System.out.println("Failed DB connection");
         }
     }
+    
+    private String getEmployeeID() {
+        return this.employeeID;
+    }
+    
+    private String getFirstName() {
+        return this.firstName;
+    }
+    
+    private String getLastName() {
+        return this.lastName;
+    }
+    
+    private String getPassword() {
+        return this.password;
+    }
+    
+    private String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 
 }

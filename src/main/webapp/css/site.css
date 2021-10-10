@@ -1,9 +1,18 @@
+
+
+@font-face {
+    font-family: Swashington;
+    src: url("../Fonts/SwashingtonCP.ttf");
+}
+
+
 .header-text {
-    font-family: Bookman, URW Bookman L, serif;
-    font-weight: 600;
+    font-family: Swashington;
+    font-feature-settings: "swsh" 2;
+   /* font-weight: 600; */
     font-size: 100px;
     color: black;
-    text-shadow: 4px 10px lightpink;
+   /*  text-shadow: 4px 10px lightpink; */
 }
 
 .prettify-box {
@@ -150,7 +159,7 @@ a:hover {
 }
 
 .background-peonies{
-    background-image: url("../Photos/Watercolor-Peonies.png");
+    background-image: url("../Photos/backgroundPattern.png");
     background-repeat: repeat;
 }
 
@@ -186,6 +195,7 @@ a:hover {
 
 .cursor-on-hover:hover{
     cursor: pointer;
+    color: hotpink;
 }
 
 .resume {
@@ -203,3 +213,24 @@ a:hover {
         display: none;
     }
 }
+
+.form-title {
+    color:hotpink;
+    font-size: 40px;
+}
+
+.employee-img:hover {
+    border: 5px solid rgba(255, 182, 193);
+}
+
+.edges {
+    padding: 0px;
+    margin: 0px;
+    border: 5px solid white;
+}
+
+.contact-text {
+    font-size: 17px;
+}
+
+

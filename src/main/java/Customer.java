@@ -36,10 +36,25 @@ public class Customer {
     }
 
     //I added a constructor that will create the object, get database access and info in one statement
-    public Customer(String customerID) {
+    public Customer(String email) {
         InitializeDB();
-        this.customerID = customerID;
-        selectDB(customerID);
+        this.email = email;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM Customers WHERE email = \"" + email + "\";");
+            while (rs.next()){
+                this.customerID = rs.getString(1);
+                this.firstName = rs.getString(2);
+                this.lastName = rs.getString(3);
+                this.phoneNumber = rs.getString(4);
+                this.email = rs.getString(5);
+                this.password = rs.getString(6);
+            }
+
+
+        } catch (SQLException ex) {
+            System.out.println("Failed to get customer data");
+        }
     }
 
     public void selectDB(String customerID) {
@@ -101,5 +116,29 @@ public class Customer {
         } catch (SQLException ex) {
             System.out.println("Failed DB connection");
         }
+    }
+    
+    public String getCustomerID() {
+        return this.customerID;
+    }
+    
+    public String getFirstName() {
+        return this.firstName;
+    }
+    
+    public String getLastName() {
+        return this.lastName;
+    }
+    
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 }

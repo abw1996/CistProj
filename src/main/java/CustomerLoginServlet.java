@@ -40,6 +40,11 @@ public class CustomerLoginServlet extends HttpServlet {
         
         Customer customer = new Customer(email);
         
+        if (customer.getPassword() == null) {
+            RequestDispatcher rd = request.getRequestDispatcher("LoginError.html");
+            rd.forward(request, response);
+        }
+        
         if (customer.getPassword().equals(password)) {
             sess.setAttribute("customer", customer);
             RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");

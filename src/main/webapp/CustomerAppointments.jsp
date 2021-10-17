@@ -7,6 +7,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="BusinessObjects.Customer"%>
 <%@page import="BusinessObjects.Appointment"%>
+<%@page import="BusinessObjects.Procedure"%>
+<%@page import="BusinessObjects.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,15 +41,25 @@
     <div id="Header"></div>
     <div class="container">
         <table>
+            <tr>
+                <th>Appointment Date/Time</th>
+                <th>Employee</th>
+                <th>Procedure</th>
+                <th>Customer</th>
+                <th>&nbsp</th>
+                <th>&nbsp</th>
+            </tr>
             <%
                 for (int x = 0; x < length; x++) {
                     Appointment appointment = appointments.get(x);
+                    Procedure procedure = new Procedure(appointment.getProcedureID());
+                    Employee employee = new Employee(appointment.getEmployeeID());
                     %>
                     <tr>
                         <th><%out.println(appointment.getAppointmentDateTime());%></th>
-                        <th><%out.println(appointment.getEmployeeID());%></th>
-                        <th><%out.println(appointment.getProcedureID());%></th>
-                        <th><%out.println(appointment.getCustomerID());%></th>
+                        <th><%out.println(employee.getFirstName() + " " + employee.getLastName());%></th>
+                        <th><%out.println(procedure.getProcedureName());%></th>
+                        <th><%out.println(customer.getFirstName() + " " + customer.getLastName());%></th>
                         <th>
                             <form>
                                 

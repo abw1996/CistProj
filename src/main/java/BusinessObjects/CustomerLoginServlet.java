@@ -1,3 +1,5 @@
+package BusinessObjects;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -43,9 +45,8 @@ public class CustomerLoginServlet extends HttpServlet {
         if (customer.getPassword() == null) {
             RequestDispatcher rd = request.getRequestDispatcher("LoginError.html");
             rd.forward(request, response);
-        }
         
-        if (customer.getPassword().equals(password)) {
+        } else if (customer.getPassword().equals(password)) {
             sess.setAttribute("customer", customer);
             RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
             rd.forward(request, response);

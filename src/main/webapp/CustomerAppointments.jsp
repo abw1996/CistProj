@@ -4,6 +4,9 @@
     Author     : ashto
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="BusinessObjects.Customer"%>
+<%@page import="BusinessObjects.Appointment"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,12 +28,42 @@
         });
         </script>
     </head>
+    
+    <%
+        Customer customer = (Customer)session.getAttribute("customer");
+        ArrayList<Appointment> appointments = customer.getAppointments();
+        int length = appointments.size();
+    %>
+    
     <body>
     <div id="Header"></div>
-    <div>
-        <p1>Appointments</p1>
-    </div>
-    <a href="/Controllers/test">appointment test</a>      
+    <div class="container">
+        <table>
+            <%
+                for (int x = 0; x < length; x++) {
+                    Appointment appointment = appointments.get(x);
+                    %>
+                    <tr>
+                        <th><%out.println(appointment.getAppointmentDateTime());%></th>
+                        <th><%out.println(appointment.getEmployeeID());%></th>
+                        <th><%out.println(appointment.getProcedureID());%></th>
+                        <th><%out.println(appointment.getCustomerID());%></th>
+                        <th>
+                            <form>
+                                
+                            </form>
+                        </th>
+                        <th>
+                            <form>
+                                
+                            </form>
+                        </th>
+                    </tr>
+                    <%
+                }
+            %>
+        </table>
+    </div>     
 </body>
 <footer id="Footer"></footer>
 </html>

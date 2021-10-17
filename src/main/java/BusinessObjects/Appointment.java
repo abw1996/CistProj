@@ -1,3 +1,5 @@
+package BusinessObjects;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,11 +47,10 @@ public class Appointment {
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM Appointments WHERE AppointmentID = \"" + appointmentID + "\";");
             while (rs.next()){
-                this.appointmentID = rs.getString(1);
-                this.apptDateTime = rs.getString(2);
-                this.employeeID = rs.getString(3);
+                this.apptDateTime = rs.getString(1);
+                this.employeeID = rs.getString(2);
+                this.customerID = rs.getString(3);
                 this.procedureID = rs.getString(4);
-                this.customerID = rs.getString(5);
             }
 
 
@@ -98,20 +99,20 @@ public class Appointment {
         }
     }
     
-    private String getAppointmentID() {
+    public String getAppointmentID() {
         return this.appointmentID;
     }
     
-    private String getAppointmentDateTime() {
+    public String getAppointmentDateTime() {
         return this.apptDateTime;
     }
-    private String getCustomerID() {
+    public String getCustomerID() {
         return this.customerID;
     }
-    private String getEmployeeID() {
+    public String getEmployeeID() {
         return this.employeeID;
     }
-    private String getProcedureID() {
+    public String getProcedureID() {
         return this.procedureID;
     }
 }

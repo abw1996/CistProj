@@ -61,7 +61,7 @@
                         <th class="text-center"><%out.println(procedure.getProcedureName());%></th>
                         <th class="text-center"><%out.println(customer.getFirstName() + " " + customer.getLastName());%></th>
                         <th>
-                            <form action="EditAppointment.jsp>" method="post">
+                            <form action="EditAppointment.jsp" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Make Changes</label>
                                 <input class="hide" name="submit" id="submit" type="submit">

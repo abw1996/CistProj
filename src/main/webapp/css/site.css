@@ -233,4 +233,10 @@ a:hover {
     font-size: 17px;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
 
+table {
+    width: 100%;
+}

@@ -42,10 +42,10 @@
     <div class="container">
         <table>
             <tr>
-                <th>Appointment Date/Time</th>
-                <th>Employee</th>
-                <th>Procedure</th>
-                <th>Customer</th>
+                <th class="text-center">Appointment Date/Time</th>
+                <th class="text-center">Stylist</th>
+                <th class="text-center">Service</th>
+                <th class="text-center">Customer</th>
                 <th>&nbsp</th>
                 <th>&nbsp</th>
             </tr>
@@ -56,18 +56,22 @@
                     Employee employee = new Employee(appointment.getEmployeeID());
                     %>
                     <tr>
-                        <th><%out.println(appointment.getAppointmentDateTime());%></th>
-                        <th><%out.println(employee.getFirstName() + " " + employee.getLastName());%></th>
-                        <th><%out.println(procedure.getProcedureName());%></th>
-                        <th><%out.println(customer.getFirstName() + " " + customer.getLastName());%></th>
+                        <th class="text-center"><%out.println(appointment.getAppointmentDateTime().substring(0, appointment.getAppointmentDateTime().length()-7));%></th>
+                        <th class="text-center"><%out.println(employee.getFirstName() + " " + employee.getLastName());%></th>
+                        <th class="text-center"><%out.println(procedure.getProcedureName());%></th>
+                        <th class="text-center"><%out.println(customer.getFirstName() + " " + customer.getLastName());%></th>
                         <th>
-                            <form>
-                                
+                            <form action="EditAppointment.jsp" metho="post">
+                                <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Make Changes</label>
+                                <input class="hide" name="submit" id="submit" type="submit">
                             </form>
                         </th>
                         <th>
-                            <form>
-                                
+                            <form action="AppointmentDeleteServlet" metho="post">
+                                <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Cancel/Delete</label>
+                                <input class="hide" name="submit" id="submit" type="submit">
                             </form>
                         </th>
                     </tr>

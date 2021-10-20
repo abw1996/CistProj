@@ -134,7 +134,7 @@ public class EmployeeObject {
                     " firstName = '"+getFName()+"',"+
                     " lastName = '"+getLName()+"',"+
                     " employeePN = '"+getPN()+"',"+
-                    " employeePW = '"+getPW()+"',"+
+                    " employeePW = '"+getPW()+"'"+
                     " WHERE employeeID=' "+getID()+"'";
             System.out.println(sql);
             int n = stmt.executeUpdate(sql);

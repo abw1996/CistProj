@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package BusinessObjects;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,12 +5,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import Business.AppointmentsObject;
 /**
  *
- * @author ashto
+ * @author dpizo
  */
-@WebServlet(name = "EditAppointmentServlet", urlPatterns = {"/EditAppointmentServlet"})
+@WebServlet(urlPatterns = {"/EditAppointmentServlet"})
 public class EditAppointmentServlet extends HttpServlet {
 
     /**
@@ -33,16 +26,43 @@ public class EditAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditAppointmentServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditAppointmentServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            System.out.println("In EditAppointmentServlet");
+            String appointmentID = request.getParameter("appointmentID");
+            String apptDateTime = request.getParameter("date");
+            String employeeID = request.getParameter("employeeID");
+            String customerID = request.getParameter("customerID");
+            String procCode = request.getParameter("procCode");
+            
+            System.out.println(appointmentID + apptDateTime + employeeID + customerID + procCode);
+            
+            AppointmentsObject appointment = new AppointmentsObject();
+            if (appointmentID != null) {
+                appointment.setAppointmentID(appointmentID);
+                appointment.getAppointmentID();
+            } 
+            else if (apptDateTime != null) {
+                appointment.setAppointmentDateTime(apptDateTime);
+                appointment.getAppointmentDateTime();
+            }
+            else if (employeeID != null) {
+                appointment.setEmployeeID(employeeID);
+                appointment.getEmployeeID();
+            }
+            else if (customerID != null) {
+                appointment.setCustomerID(customerID);
+                appointment.getCustomerID();
+            }
+            else if (procCode != null) {
+                appointment.setProcedureID(procCode);
+                appointment.getProcedureID();
+            }
+            appointment.updateDB();
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+    }
+        finally {
+            System.out.println("EditAppointment Servlet Ending...");
         }
     }
 

@@ -54,6 +54,8 @@
                     Appointment appointment = appointments.get(x);
                     Procedure procedure = new Procedure(appointment.getProcedureID());
                     Employee employee = new Employee(appointment.getEmployeeID());
+                    String appointmentSubmit = appointment.getAppointmentID() + "Submit";
+                    String appointmentDeleteSubmit = appointment.getAppointmentID() + "DeleteSubmit";
                     %>
                     <tr>
                         <th class="text-center"><%out.println(appointment.getAppointmentDateTime().substring(0, appointment.getAppointmentDateTime().length()-7));%></th>
@@ -63,15 +65,15 @@
                         <th>
                             <form action="EditAppointment.jsp" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
-                                <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Make Changes</label>
-                                <input class="hide" name="submit" id="submit" type="submit">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
+                                <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
                             </form>
                         </th>
                         <th>
                             <form action="AppointmentDeleteServlet" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
-                                <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteSubmit">Cancel/Delete</label>
-                                <input class="hide" name="DeleteSubmit" id="DeleteSubmit" type="submit">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentDeleteSubmit%>">Cancel/Delete</label>
+                                <input class="hide" name="<%=appointmentDeleteSubmit%>" id="<%=appointmentDeleteSubmit%>" type="submit">
                             </form>
                         </th>
                     </tr>

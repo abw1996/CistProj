@@ -66,7 +66,7 @@
                 <option value="P0018">Lip Wax</option>
                 <option value="P0019">Beard Trim</option>
                 <option value="P0020">Mens Shave</option>
-            </select><br>
+            </select><br><hr>
             <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Submit Change</label>
             <input class="hide" name="submit" id="submit" type="submit">
             </form>

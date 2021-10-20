@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package BusinessObjects;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ashto
  */
-@WebServlet(urlPatterns = {"/CustomerLoginServlet"})
-public class CustomerLoginServlet extends HttpServlet {
+@WebServlet(name = "AppointmentDeleteServlet", urlPatterns = {"/AppointmentDeleteServlet"})
+public class AppointmentDeleteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,36 +32,15 @@ public class CustomerLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        HttpSession sess = request.getSession();
-        
-        Customer customer = new Customer(email);
-        
-        if (customer.getPassword() == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("LoginError.html");
-            rd.forward(request, response);
-        }
-        
-        if (customer.getPassword().equals(password)) {
-            sess.setAttribute("customer", customer);
-            RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
-            rd.forward(request, response);
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("LoginError.html");
-            rd.forward(request, response);
-        }
-        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerLoginServlet</title>");            
+            out.println("<title>Servlet AppointmentDeleteServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomerLoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AppointmentDeleteServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

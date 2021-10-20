@@ -1,3 +1,5 @@
+package BusinessObjects;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,7 +36,7 @@ public class Procedure {
     public void selectDB(String procedureID) {
         try {
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Procedures WHERE ProcedureID = \"" + procedureID + "\";");
+            ResultSet rs = s.executeQuery("SELECT * FROM Procedures WHERE procedureID = \"" + procedureID + "\";");
             while (rs.next()){
                 this.procedureID = rs.getString(1);
                 this.procedureName = rs.getString(2);
@@ -85,15 +87,15 @@ public class Procedure {
         }
     }
     
-    private String getProcedureID() {
+    public String getProcedureID() {
         return this.procedureID;
     }
     
-    private String getProcedureName() {
+    public String getProcedureName() {
         return this.procedureName;
     }
     
-    private String getProcedureCost() {
+    public String getProcedureCost() {
         return this.procedureCost;
     }
 

@@ -4,6 +4,11 @@
     Author     : ashto
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="BusinessObjects.Customer"%>
+<%@page import="BusinessObjects.Appointment"%>
+<%@page import="BusinessObjects.Procedure"%>
+<%@page import="BusinessObjects.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,12 +30,58 @@
         });
         </script>
     </head>
+    
+    <%
+        Customer customer = (Customer)session.getAttribute("customer");
+        ArrayList<Appointment> appointments = customer.getAppointments();
+        int length = appointments.size();
+    %>
+    
     <body>
     <div id="Header"></div>
-    <div>
-        <p1>Appointments</p1>
-    </div>
-    <a href="/Controllers/test">appointment test</a>      
+    <div class="container">
+        <table>
+            <tr>
+                <th class="text-center">Appointment Date/Time</th>
+                <th class="text-center">Stylist</th>
+                <th class="text-center">Service</th>
+                <th class="text-center">Customer</th>
+                <th>&nbsp</th>
+                <th>&nbsp</th>
+            </tr>
+            <%
+                for (int x = 0; x < length; x++) {
+                    Appointment appointment = appointments.get(x);
+                    Procedure procedure = new Procedure(appointment.getProcedureID());
+                    Employee employee = new Employee(appointment.getEmployeeID());
+                    String appointmentSubmit = appointment.getAppointmentID() + "Submit";
+                    String appointmentDeleteSubmit = appointment.getAppointmentID() + "DeleteSubmit";
+                    %>
+                    <tr>
+                        <th class="text-center"><%out.println(appointment.getAppointmentDateTime().substring(0, appointment.getAppointmentDateTime().length()-7));%></th>
+                        <th class="text-center"><%out.println(employee.getFirstName() + " " + employee.getLastName());%></th>
+                        <th class="text-center"><%out.println(procedure.getProcedureName());%></th>
+                        <th class="text-center"><%out.println(customer.getFirstName() + " " + customer.getLastName());%></th>
+                        <th>
+                            <form action="EditAppointment.jsp" method="post">
+                                <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
+                                <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
+                            </form>
+                        </th>
+                        <th>
+                            <form action="AppointmentDeleteServlet" method="post">
+                                <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentDeleteSubmit%>">Cancel/Delete</label>
+                                <input class="hide" name="<%=appointmentDeleteSubmit%>" id="<%=appointmentDeleteSubmit%>" type="submit">
+                            </form>
+                        </th>
+                    </tr>
+                    <%
+                }
+            %>
+        </table>
+    </div>     
 </body>
 <footer id="Footer"></footer>
 </html>

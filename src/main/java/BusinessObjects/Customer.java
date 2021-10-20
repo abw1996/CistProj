@@ -1,9 +1,12 @@
+package BusinessObjects;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -116,6 +119,24 @@ public class Customer {
         } catch (SQLException ex) {
             System.out.println("Failed DB connection");
         }
+    }
+    
+    public ArrayList<Appointment> getAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select appointmentID FROM Appointments WHERE customerID = \"" + customerID + "\";");
+            while (rs.next()){
+                String appointmentID = rs.getString(1);
+                Appointment appointment = new Appointment(appointmentID);
+                appointments.add(appointment);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            System.out.println(ex.toString());
+        }
+        return appointments;
     }
     
     public String getCustomerID() {

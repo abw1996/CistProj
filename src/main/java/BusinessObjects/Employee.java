@@ -1,3 +1,5 @@
+package BusinessObjects;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -98,23 +100,23 @@ public class Employee {
         }
     }
     
-    private String getEmployeeID() {
+    public String getEmployeeID() {
         return this.employeeID;
     }
     
-    private String getFirstName() {
+    public String getFirstName() {
         return this.firstName;
     }
     
-    private String getLastName() {
+    public String getLastName() {
         return this.lastName;
     }
     
-    private String getPassword() {
+    public String getPassword() {
         return this.password;
     }
     
-    private String getPhoneNumber() {
+    public String getPhoneNumber() {
         return this.phoneNumber;
     }
 

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -118,6 +119,24 @@ public class Employee {
     
     public String getPhoneNumber() {
         return this.phoneNumber;
+    }
+    
+    public ArrayList<Employee> getEmployees() {
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select employeeID FROM Employees;");
+            while (rs.next()){
+                String employeeID = rs.getString(1);
+                Employee employee = new Employee(employeeID);
+                employees.add(employee);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting employees");
+            System.out.println(ex.toString());
+        }
+        return employees;
     }
 
 }

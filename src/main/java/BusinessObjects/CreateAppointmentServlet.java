@@ -1,11 +1,13 @@
+package BusinessObjects;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Business.AppointmentsObject;
 /**
  *
  * @author dpizo
@@ -26,23 +28,22 @@ public class CreateAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("In CreateAppointmentServlet");
-            String apptID = request.getParameter("appointmentID");
-            int appointmentID = Integer.parseInt(apptID);
-            String apptDateTime = request.getParameter("date");
+            String apptDateTime = request.getParameter("dateTime");
             String employeeID = request.getParameter("employeeID");
             String customerID = request.getParameter("customerID");
             String procCode = request.getParameter("procCode");
             
-            System.out.println(appointmentID + apptDateTime + employeeID + customerID + procCode);
-            
-            //Or get a ApptObject from another Session, not sure how you want to do the edit, create and delete pages.
-            AppointmentsObject appointment = new AppointmentsObject();
-            appointment.insertDB(appointmentID, apptID, apptID, apptID, procCode);
+            Appointment appointment = new Appointment();
+            String apptID = appointment.createID();
+            appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
         }
         
         catch (Exception ex) {
             System.out.println(ex);
+            
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.forward(request, response);
+        
     }
         finally {
             System.out.println("CreateAppointmentServlet Servlet Ending...");

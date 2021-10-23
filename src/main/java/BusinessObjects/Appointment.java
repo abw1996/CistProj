@@ -49,8 +49,10 @@ public class Appointment {
             while (rs.next()){
                 this.apptDateTime = rs.getString(1);
                 this.employeeID = rs.getString(2);
-                this.customerID = rs.getString(3);
-                this.procedureID = rs.getString(4);
+                this.procedureID = rs.getString(3);
+                appointmentID = rs.getString(4);
+                this.customerID = rs.getString(5);
+                System.out.println();
             }
 
 
@@ -62,9 +64,12 @@ public class Appointment {
     public void insertDB(String appointmentID, String apptDateTime, String employeeID, String procedureID, String customerID) {
         try {
             Statement s = con.createStatement();
-            s.executeUpdate("INSERT INTO Procedures VALUES (\"" + appointmentID + "\", \"" + apptDateTime + "\", \""+ employeeID + "\", \"" + procedureID + "\", \"" + customerID + "\");");
+            String query = "INSERT INTO Appointments VALUES (\"" + apptDateTime + "\", \"" + employeeID + "\", \""+ procedureID + "\", \"" + appointmentID + "\", \"" + customerID + "\");";
+            s.executeUpdate(query);
+            System.out.println("Update sent");
         } catch (SQLException ex) {
-            System.out.println("Failed to enter appointment data");
+            String error = ex.toString();
+            System.out.println(error);
         }
     }
 
@@ -116,6 +121,26 @@ public class Appointment {
         return this.procedureID;
     }
     
+    public void setAppointmentID(String id) {
+        appointmentID = id;
+    }
+    
+    public void setAppointmentDateTime(String appt) {
+        apptDateTime = appt;
+    }
+    
+    public void setEmployeeID(String id) {
+        employeeID = id;
+    }
+    
+    public void setCustomerID(String id) {
+        customerID = id;
+    }
+    
+    public void setProcedureID(String code) {
+        procedureID = code;
+    }
+    
     public String createID() {
         int highest = 0;
         try {
@@ -130,7 +155,26 @@ public class Appointment {
         } catch (SQLException ex) {
             System.out.println("Failed to get appointment data");
         }
-        
-        return String.valueOf(highest);
+        highest += 1;
+        String returnValue = String.valueOf(highest);
+        int count = 6 - returnValue.length();
+        for (int x = 0; x < count; x++) {
+            returnValue = "0" + returnValue;
+        }
+        return returnValue;
     }
+    
+    public void updateDB(String appointmentID, String apptDateTime, String employeeID, String procedureID) {
+        try {
+            Statement s = con.createStatement();
+            String query = "Update Appointments SET apptDateTime= \"" + apptDateTime + "\", employeeID= \"" + employeeID + "\",procedureID= \"" + procedureID + "\" WHERE appointmentID = \""+ appointmentID + "\";";
+            s.executeUpdate(query);
+            System.out.println("Update sent");
+        } catch (SQLException ex) {
+            String error = ex.toString();
+            System.out.println(error);
+        }
+    }
+    
+    
 }

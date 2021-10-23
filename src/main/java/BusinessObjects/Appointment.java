@@ -68,7 +68,7 @@ public class Appointment {
         }
     }
 
-    public void deleteDB(String procedureID) {
+    public void deleteDB(String appointmentID) {
         try {
             Statement s = con.createStatement();
             s.executeUpdate("DELETE FROM Appointments WHERE AppointmentID = \"" + appointmentID + "\";");
@@ -114,5 +114,23 @@ public class Appointment {
     }
     public String getProcedureID() {
         return this.procedureID;
+    }
+    
+    public String createID() {
+        int highest = 0;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT appointmentID FROM Appointments;");
+            while (rs.next()){
+                int x = Integer.parseInt(rs.getString(1));
+                if (x > highest) {
+                    highest = x;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get appointment data");
+        }
+        
+        return String.valueOf(highest);
     }
 }

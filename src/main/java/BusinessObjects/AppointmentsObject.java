@@ -1,4 +1,4 @@
-package Business;
+package BusinessObjects;
 import java.sql.*;
 /**
  *

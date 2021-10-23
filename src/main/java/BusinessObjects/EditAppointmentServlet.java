@@ -2,6 +2,7 @@ package BusinessObjects;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,45 +28,27 @@ public class EditAppointmentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        
+        String appointmentID = request.getParameter("appointmentID");
+        Appointment appointment = new Appointment(appointmentID);
+        String apptDateTime = request.getParameter("dateTime");
+        apptDateTime = apptDateTime.replace("T", " ") + ":00";
+        String employeeID = request.getParameter("employeeID");
+        String procCode = request.getParameter("procedureID");
+        
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.forward(request, response);
+        
+        appointment.updateDB(appointmentID, apptDateTime, employeeID, procCode);
+        
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("In EditAppointmentServlet");
-            String appointmentID = request.getParameter("appointmentID");
-            String apptDateTime = request.getParameter("date");
-            String employeeID = request.getParameter("employeeID");
-            String customerID = request.getParameter("customerID");
-            String procCode = request.getParameter("procCode");
             
-            System.out.println(appointmentID + apptDateTime + employeeID + customerID + procCode);
-            
-            AppointmentsObject appointment = new AppointmentsObject();
-            if (appointmentID != null) {
-                appointment.setAppointmentID(appointmentID);
-                appointment.getAppointmentID();
-            } 
-            else if (apptDateTime != null) {
-                appointment.setAppointmentDateTime(apptDateTime);
-                appointment.getAppointmentDateTime();
-            }
-            else if (employeeID != null) {
-                appointment.setEmployeeID(employeeID);
-                appointment.getEmployeeID();
-            }
-            else if (customerID != null) {
-                appointment.setCustomerID(customerID);
-                appointment.getCustomerID();
-            }
-            else if (procCode != null) {
-                appointment.setProcedureID(procCode);
-                appointment.getProcedureID();
-            }
-            appointment.updateDB();
         }
         catch (Exception ex) {
             System.out.println(ex);
     }
-        finally {
-            System.out.println("EditAppointment Servlet Ending...");
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

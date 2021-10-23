@@ -30,6 +30,8 @@
     <%
        String appointmentID = request.getParameter("appointmentID");
        Appointment appointment = new Appointment(appointmentID);
+       Employee employeeGetter = new Employee();
+        ArrayList<Employee> employees = employeeGetter.getEmployees();
     %>
     
     <body>
@@ -43,7 +45,15 @@
                 <label class="hire-form-text">Date/Time</label> <br>
             <input class="text-input" type="datetime-local" name="dateTime" id="dateTime" value="<%=appointment.getAppointmentDateTime()%>" required><br>
             <label class="hire-form-text" for="employeeID">Stylist</label> <br>
-            <input class="text-input" type="text" name="employeeID" id="employeeID" value="<%=appointment.getEmployeeID()%>" placeholder="<%=appointment.getEmployeeID()%>" required><br>
+            <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+                <%
+                    for (int x = 0; x < employees.size(); x++) {
+                        %>
+                        <option value="<%=employees.get(x).getEmployeeID()%>"><%out.println(employees.get(x).getFirstName() + " " + employees.get(x).getLastName());%></option>
+                        <%
+                    }
+                %>
+            </select><br>
             <label class="hire-form-text">Service</label> <br>
             <select class="text-input" type="text" name="procedureID" id="procedureID" required>
                 <option value="P0001">Kids Cut</option>

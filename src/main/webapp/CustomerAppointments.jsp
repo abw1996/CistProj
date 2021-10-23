@@ -45,7 +45,8 @@
         <div class="row justify-content-center">
         <div class="col-lg-6 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px;">
             <h1 class="form-title">Create Appointment</h1>
-        <form action="EditAppointmentServlet" method="post">
+        <form action="CreateAppointmentServlet" method="post">
+            <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
             <label class="hire-form-text">Date/Time</label> <br>
             <input class="text-input" type="datetime-local" name="dateTime" id="dateTime" value="" required><br>
             <label class="hire-form-text" for="employeeID">Stylist</label> <br>
@@ -60,7 +61,7 @@
             </select>
                 <br>
             <label class="hire-form-text">Service</label> <br>
-            <select class="text-input" type="text" name="procedureID" id="procedureID" required>
+            <select class="text-input" type="text" name="procedureID" id="procedureID" value="" required>
                 <option value="P0001">Kids Cut</option>
                 <option value="P0002">Shampoo and Blowdry</option>
                 <option value="P0003">Color and Cut</option>

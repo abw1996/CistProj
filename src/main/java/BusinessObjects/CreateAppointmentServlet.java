@@ -27,22 +27,26 @@ public class CreateAppointmentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String apptDateTime = request.getParameter("dateTime");
-            String employeeID = request.getParameter("employeeID");
-            String customerID = request.getParameter("customerID");
-            String procCode = request.getParameter("procCode");
+        String apptDateTime = request.getParameter("dateTime");
+        apptDateTime = apptDateTime.replace("T", " ") + ":00";
+        String employeeID = request.getParameter("employeeID");
+        String customerID = request.getParameter("customerID");
+        String procCode = request.getParameter("procedureID");
             
-            Appointment appointment = new Appointment();
-            String apptID = appointment.createID();
-            appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
+        Appointment appointment = new Appointment();
+        String apptID = appointment.createID();
+        appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
+            
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            
         }
         
         catch (Exception ex) {
             System.out.println(ex);
             
-        RequestDispatcher rd = request.getRequestDispatcher("index.html");
-        rd.forward(request, response);
+        
         
     }
         finally {

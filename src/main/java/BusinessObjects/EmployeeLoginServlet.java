@@ -1,3 +1,5 @@
+package BusinessObjects;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -7,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
-import Business.EmployeeObject;
+
 
 /**
  *
@@ -28,29 +30,31 @@ public class EmployeeLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            System.out.println("In Employee Login Servlet");
-            String idgui = request.getParameter("employeeID");
-            System.out.println("Employee Id is: " + idgui);
-            String pwgui = request.getParameter("password");
-            System.out.println("Employee Password is: " + pwgui);
+        
+        System.out.println("In Employee Login Servlet");
+        String idgui = request.getParameter("employeeID");
+        System.out.println("Employee Id is: " + idgui);
+        String pwgui = request.getParameter("password");
+        System.out.println("Employee Password is: " + pwgui);
             
-            EmployeeObject employee = new EmployeeObject();
-            employee.selectDB(idgui);
+        Employee employee = new Employee(idgui);
             
-            String pwdb = employee.getPW();
-            if(pwgui.equals(pwdb)) {
-                System.out.println("Found");
-                HttpSession session = request.getSession();
-                session.setAttribute("employee", employee);
-                RequestDispatcher rs = request.getRequestDispatcher("EmployeePage.jsp");
-                rs.forward(request, response);
+        String pwdb = employee.getPassword();
+        if(pwgui.equals(pwdb)) {
+            System.out.println("Found");
+            HttpSession session = request.getSession();
+            session.setAttribute("employee", employee);
+            RequestDispatcher rs = request.getRequestDispatcher("EmployeeAppointments.jsp");
+            rs.forward(request, response);
             }
             else {
                 System.out.println("Not Found");
                 RequestDispatcher rs = request.getRequestDispatcher("LoginError.jsp");
                 rs.forward(request, response);
             }
+        
+        try (PrintWriter out = response.getWriter()) {
+            
         }
         catch (Exception ex) {
             System.out.println(ex);

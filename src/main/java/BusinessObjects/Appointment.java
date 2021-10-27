@@ -45,12 +45,12 @@ public class Appointment {
     public void selectDB(String appointmentID) {
         try {
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM Appointments WHERE AppointmentID = \"" + appointmentID + "\";");
+            ResultSet rs = s.executeQuery("SELECT * FROM Appointments WHERE appointmentID = \"" + appointmentID + "\";");
             while (rs.next()){
-                this.apptDateTime = rs.getString(1);
-                this.employeeID = rs.getString(2);
-                this.procedureID = rs.getString(3);
-                appointmentID = rs.getString(4);
+                this.appointmentID = rs.getString(1);
+                this.apptDateTime = rs.getString(2);
+                this.employeeID = rs.getString(3);
+                this.procedureID = rs.getString(4);
                 this.customerID = rs.getString(5);
                 System.out.println();
             }
@@ -64,7 +64,7 @@ public class Appointment {
     public void insertDB(String appointmentID, String apptDateTime, String employeeID, String procedureID, String customerID) {
         try {
             Statement s = con.createStatement();
-            String query = "INSERT INTO Appointments VALUES (\"" + apptDateTime + "\", \"" + employeeID + "\", \""+ procedureID + "\", \"" + appointmentID + "\", \"" + customerID + "\");";
+            String query = "INSERT INTO Appointments VALUES (\"" + appointmentID + "\", \"" + apptDateTime + "\", \""+ employeeID + "\", \"" + procedureID + "\", \"" + customerID + "\");";
             s.executeUpdate(query);
             System.out.println("Update sent");
         } catch (SQLException ex) {

@@ -138,5 +138,41 @@ public class Employee {
         }
         return employees;
     }
+    
+    public ArrayList<Appointment> getAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select appointmentID FROM Appointments;");
+            while (rs.next()){
+                String appointmentID = rs.getString(1);
+                Appointment appointment = new Appointment(appointmentID);
+                appointments.add(appointment);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            System.out.println(ex.toString());
+        }
+        return appointments;
+    }
+    
+    public ArrayList<Customer> getCustomers() {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select email FROM Customers;");
+            while (rs.next()){
+                String email = rs.getString(1);
+                Customer customer = new Customer(email);
+                customers.add(customer);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            System.out.println(ex.toString());
+        }
+        return customers;
+    }
 
 }

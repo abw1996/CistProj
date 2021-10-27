@@ -143,7 +143,7 @@ public class Employee {
         ArrayList<Appointment> appointments = new ArrayList<Appointment>();
         try {
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("Select appointmentID FROM Appointments;");
+            ResultSet rs = s.executeQuery("Select appointmentID FROM Appointments WHERE employeeID = \"" + this.employeeID + "\";");
             while (rs.next()){
                 String appointmentID = rs.getString(1);
                 Appointment appointment = new Appointment(appointmentID);
@@ -151,8 +151,8 @@ public class Employee {
                 
             }   
         } catch (SQLException ex) {
-            System.out.println("SQL error getting appointments");
-            System.out.println(ex.toString());
+            String exString = ex.toString();
+            System.out.println(exString);
         }
         return appointments;
     }

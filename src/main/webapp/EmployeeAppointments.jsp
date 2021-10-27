@@ -143,6 +143,92 @@
                 }
             %>
         </table>
+        <hr>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Add New Employee</h1>
+                <hr>
+                <form class="text-center" action="/CreateEmployeeServlet" method="post">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="employeePN" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="employeePW" required><br>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>
+                    <input class="hide" name="submitEmployeeCreate" id="submitEmployeeCreate" type="submit">
+
+                </form>
+
+            </div>
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Create Customer</h1>
+                <hr>
+                <form class="text-center" action="/CreateCustomerServlet" method="post">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+                    <label class="hire-form-text">Email</label> <br>
+                    <input class="text-input" type="email" name="email" id="email" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="password" required><br>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>
+                    <input class="hide" name="submitCreateCustomer" id="submit" type="submitCreateCustomer">
+
+                </form>
+
+            </div>
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Delete Employee/Customer</h1>
+                <hr>
+                <form class="text-center" action="/DeleteCustomerServlet" method="post">
+                    <label class="hire-form-text">Customer</label><br>
+                    <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
+                        <%
+                            for (int x = 0; x < customers.size(); x++) {
+                                %>
+                                <option value="<%=customers.get(x).getCustomerID()%>"><%out.println(customers.get(x).getFirstName() + " " + customers.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Delete</label>
+                    <input class="hide" name="DeleteCustomerSubmit" id="submit" type="DeleteCustomerSubmit">
+
+                </form>
+                    
+                <form class="text-center" action="/DeleteEmployeeServlet" method="post">
+                    <label class="hire-form-text">Employee</label><br>
+                    <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+                        <%
+                            for (int x = 0; x < employees.size(); x++) {
+                                %>
+                                <option value="<%=employees.get(x).getEmployeeID()%>"><%out.println(employees.get(x).getFirstName() + " " + employees.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Delete</label>
+                    <input class="hide" name="DeleteEmployeeSubmit" id="submit" type="DeleteEmployeeSubmit">
+
+                </form>
+
+            </div>
+        </div>
+        
     </div>     
 </body>
 <footer id="Footer"></footer>

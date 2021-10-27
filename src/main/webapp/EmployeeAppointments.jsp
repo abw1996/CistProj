@@ -48,7 +48,7 @@
             <h1 class="form-title">Create Appointment</h1>
         <form action="CreateAppointmentServlet" method="post">
             <label class="hire-form-text">Customer</label><br>
-            <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+            <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
                 <%
                     for (int x = 0; x < customers.size(); x++) {
                         %>

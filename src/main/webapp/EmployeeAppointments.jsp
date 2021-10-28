@@ -100,6 +100,42 @@
         </div>
             <hr>
             <h1 class="form-title">Current Appointments</h1>
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Get Appointments For Day</h1>
+                <hr>
+                <form class="text-center" action="GetAppointmentsforDate" method="post">
+                    <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                    <label class="hire-form-text">Date</label> <br>
+                    <input class="text-input" type="date" name="date" id="date" value="" required><br><hr>
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="SubmitAppointmentsForDate">Get Appointments</label>
+                    <input class="hide" name="SubmitAppointmentsForDate" id="SubmitAppointmentsForDate" type="submit">
+
+                </form>
+            </div>
+                    
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Get Appointments For Customer</h1>
+                <hr>
+                <form class="text-center" action="GetAppointmentsforCustomer" method="post">
+                    <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                    <label class="hire-form-text">Customer</label><br>
+                    <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
+                        <%
+                            for (int x = 0; x < customers.size(); x++) {
+                                %>
+                                <option value="<%=customers.get(x).getCustomerID()%>"><%out.println(customers.get(x).getFirstName() + " " + customers.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select><br><hr>
+                    
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="SubmitAppointmentsForCustomer">Get Appointments</label>
+                    <input class="hide" name="SubmitAppointmentsForCustomer" id="SubmitAppointmentsForCustomer" type="submit">
+
+                </form>
+            </div>         
+            
         <table>
             <tr>
                 <th class="text-center">Appointment Date/Time</th>
@@ -143,6 +179,171 @@
                 }
             %>
         </table>
+        <hr>
+        <div class="row justify-content-center align-items-center">
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Edit My Account</h1>
+                <hr>
+                <form class="text-center" action="EditEmployeeServlet" method="post">
+                    <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=employee.getFirstName()%>" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" placeholder="<%=employee.getLastName()%>" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="employeePN" placeholder="<%=employee.getPhoneNumber()%>" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="employeePW" placeholder="<%=employee.getPassword()%>" required><br>
+                    <%if (employee.getAdminAccess().equals("true")) {%>
+                    <label class="hire-form-text">Admin Access</label> <br>
+                    <select class="text-input" type="text" name="adminAccess" id="adminAccess" value="" required>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select><br>                   
+                    <%} else {%>
+                    <input type="hidden" name="adminAccess" id="adminAccess" value="false">
+                    <%}%>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submitEmployeeEdit">Submit Changes</label>
+                    <input class="hide" name="submitEmployeeEdit" id="submitEmployeeEdit" type="submit">
+
+                </form>
+
+            </div>
+            <% if (employee.getAdminAccess().equals("true")) { %>
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Add New Employee</h1>
+                <hr>
+                <form class="text-center" action="CreateEmployeeServlet" method="post">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="employeePN" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="employeePW" required><br>
+                    <label class="hire-form-text">Admin Access</label> <br>
+                    <select class="text-input" type="text" name="adminAccess" id="adminAccess" value="" required>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select><br><br>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submitEmployeeCreate">Create</label>
+                    <input class="hide" name="submitEmployeeCreate" id="submitEmployeeCreate" type="submit">
+
+                </form>
+
+            </div>
+            
+            
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Create Customer</h1>
+                <hr>
+                <form class="text-center" action="CreateCustomerServlet" method="post">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+                    <label class="hire-form-text">Email</label> <br>
+                    <input class="text-input" type="email" name="email" id="email" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="password" required><br>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submitCreateCustomer">Create</label>
+                    <input class="hide" name="submitCreateCustomer" id="submit" type="submitCreateCustomer">
+
+                </form>
+
+            </div>
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Delete Employee/Customer</h1>
+                <hr>
+                <form class="text-center" action="DeleteCustomerServlet" method="post">
+                    <label class="hire-form-text">Customer</label><br>
+                    <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
+                        <%
+                            for (int x = 0; x < customers.size(); x++) {
+                                %>
+                                <option value="<%=customers.get(x).getCustomerID()%>"><%out.println(customers.get(x).getFirstName() + " " + customers.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Delete</label>
+                    <input class="hide" name="DeleteCustomerSubmit" id="submit" type="DeleteCustomerSubmit">
+
+                </form>
+                    
+                <form class="text-center" action="DeleteEmployeeServlet" method="post">
+                    <label class="hire-form-text">Employee</label><br>
+                    <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+                        <%
+                            for (int x = 0; x < employees.size(); x++) {
+                                %>
+                                <option value="<%=employees.get(x).getEmployeeID()%>"><%out.println(employees.get(x).getFirstName() + " " + employees.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteEmployeeSubmit">Delete</label>
+                    <input class="hide" name="DeleteEmployeeSubmit" id="submit" type="DeleteEmployeeSubmit">
+
+                </form>
+
+            </div>
+                    
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Edit Employee</h1>
+                <hr>
+                <form class="text-center" action="EditEmployeeServlet" method="post">
+                    <label class="hire-form-text">Employee</label><br>
+                    <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+                        <%
+                            for (int x = 0; x < employees.size(); x++) {
+                                %>
+                                <option value="<%=employees.get(x).getEmployeeID()%>"><%out.println(employees.get(x).getFirstName() + " " + employees.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select><br>
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="employeePN" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="employeePW" required><br>
+                    <%if (employee.getAdminAccess().equals("true")) {%>
+                    <label class="hire-form-text">Admin Access</label> <br>
+                    <select class="text-input" type="text" name="adminAccess" id="adminAccess" value="" required>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select><br>                   
+                    <%} else {%>
+                    <input type="hidden" name="adminAccess" id="adminAccess" value="false">
+                    <%}%>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submitEmployeeEditer">Submit Changes</label>
+                    <input class="hide" name="submitEmployeeEditer" id="submitEmployeeEditer" type="submit">
+
+                </form>
+
+            </div>
+        <%}%>
+        </div>
     </div>     
 </body>
 <footer id="Footer"></footer>

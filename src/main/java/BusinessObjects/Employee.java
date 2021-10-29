@@ -81,6 +81,20 @@ public class Employee {
             System.out.println(ex.toString());
         }
     }
+    
+    public void updateDB(String employeeID, String firstName, String lastName, String phoneNumber, String password, String adminAccess) {
+        try {
+            Statement s = con.createStatement();
+            String query = "UPDATE Employees " +
+                            "SET firstName = \"" + firstName + "\", lastName = \"" + lastName + "\", employeePN = \"" + phoneNumber + "\", employeePW = \"" + password + "\", adminAccess = \"" + adminAccess + "\" " +
+                            "WHERE employeeID = \"" + employeeID + "\";";
+            s.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("Failed to delete employee data");
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+    }
 
     public void display() {
         System.out.println("employee id: " + this.employeeID);

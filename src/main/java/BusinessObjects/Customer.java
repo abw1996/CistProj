@@ -82,7 +82,8 @@ public class Customer {
     public void insertDB(String customerID, String firstName, String lastName, String phoneNumber, String email, String password) {
         try {
             Statement s = con.createStatement();
-            s.executeUpdate("INSERT INTO Customers VALUES (\"" + customerID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber + "\", \"" + email + "\", \"" + password + "\");");
+            String query = "INSERT INTO Customers VALUES (\"" + customerID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber + "\", \"" + email + "\", \"" + password + "\");";
+            s.executeUpdate(query);
         } catch (SQLException ex) {
             System.out.println("Failed to insert customer data");
             System.out.println(ex.toString());

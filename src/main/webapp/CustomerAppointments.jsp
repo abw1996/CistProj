@@ -138,14 +138,14 @@
             <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
                 <h1 class="form-title">Edit Account</h1>
                 <hr>
-                <form class="text-center" action="/EditCustomerServlet" method="post">
+                <form class="text-center" action="EditCustomerServlet" method="post">
                     <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=customer.getFirstName()%>" required><br>
                     <label class="hire-form-text">Last Name</label> <br>
                     <input class="text-input" type="text" name="lastName" id="lastName" placeholder="<%=customer.getLastName()%>" required><br>                   
-                    <label class="hire-form-text">Last Name</label> <br>
-                    <input class="text-input" type="text" name="lastName" id="email" placeholder="<%=customer.getEmail()%>" required><br>
+                    <label class="hire-form-text">Email</label> <br>
+                    <input class="text-input" type="text" name="email" id="email" placeholder="<%=customer.getEmail()%>" required><br>
                     <label class="hire-form-text">Phone Number</label> <br>
                     <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="<%=customer.getPhoneNumber()%>" required><br>
                     <label class="hire-form-text">Password</label> <br>
@@ -160,7 +160,7 @@
             </div>
             
         </div>
-                    <form class="text-center" action="/DeleteCustomerServlet" method="post">
+                    <form class="text-center" action="DeleteCustomerServlet" method="post">
                         <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
                         <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteCustomerSubmit">Delete Account</label>
                         <input class="hide" name="DeleteCustomerSubmit" id="DeleteCustomerSubmit" type="submit">

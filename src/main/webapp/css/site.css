@@ -5,6 +5,22 @@
     src: url("../Fonts/SwashingtonCP.ttf");
 }
 
+@media screen and (max-width: 1380px) {
+    .second-br {
+        display: inline !important;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .scissor-right {
+        display: none;
+    }
+    
+    .scissor-left {
+        display: none;
+    }
+}
+
 
 .header-text {
     font-family: Swashington;
@@ -204,15 +220,7 @@ a:hover {
     margin-bottom: 0px;
 }
 
-@media screen and (max-width: 960px) {
-    .scissor-right {
-        display: none;
-    }
-    
-    .scissor-left {
-        display: none;
-    }
-}
+
 
 .form-title {
     color:hotpink;
@@ -240,3 +248,8 @@ table, th, td {
 table {
     width: 100%;
 }
+
+.second-br {
+    display: none;
+}
+

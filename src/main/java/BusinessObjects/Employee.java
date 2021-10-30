@@ -24,6 +24,7 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String password;
+    private String adminAccess;
     private Connection con;
 
     public Employee() {
@@ -52,6 +53,7 @@ public class Employee {
                 this.lastName = rs.getString(3);
                 this.phoneNumber = rs.getString(4);
                 this.password = rs.getString(5);
+                this.adminAccess = rs.getString(6);
             }
 
 
@@ -60,10 +62,10 @@ public class Employee {
         }
     }
 
-    public void insertDB(String employeeID, String firstName, String lastName, String phoneNumber, String password) {
+    public void insertDB(String employeeID, String firstName, String lastName, String phoneNumber, String password, String adminAccess) {
         try {
             Statement s = con.createStatement();
-            s.executeUpdate("INSERT INTO Employees VALUES (\"" + employeeID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber +"\", \"" + password + "\");");
+            s.executeUpdate("INSERT INTO Employees VALUES (\"" + employeeID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber +"\", \"" + password + "\", \"" + adminAccess + "\");");
         } catch (SQLException ex) {
             System.out.println("Failed to insert customer data");
             System.out.println(ex.toString());
@@ -77,6 +79,20 @@ public class Employee {
         } catch (SQLException ex) {
             System.out.println("Failed to delete employee data");
             System.out.println(ex.toString());
+        }
+    }
+    
+    public void updateDB(String employeeID, String firstName, String lastName, String phoneNumber, String password, String adminAccess) {
+        try {
+            Statement s = con.createStatement();
+            String query = "UPDATE Employees " +
+                            "SET firstName = \"" + firstName + "\", lastName = \"" + lastName + "\", employeePN = \"" + phoneNumber + "\", employeePW = \"" + password + "\", adminAccess = \"" + adminAccess + "\" " +
+                            "WHERE employeeID = \"" + employeeID + "\";";
+            s.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("Failed to delete employee data");
+            String exString = ex.toString();
+            System.out.println(exString);
         }
     }
 
@@ -121,6 +137,10 @@ public class Employee {
         return this.phoneNumber;
     }
     
+    public String getAdminAccess() {
+        return this.adminAccess;
+    }
+    
     public ArrayList<Employee> getEmployees() {
         ArrayList<Employee> employees = new ArrayList<Employee>();
         try {
@@ -138,5 +158,81 @@ public class Employee {
         }
         return employees;
     }
+    
+    public ArrayList<Appointment> getAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select appointmentID FROM Appointments WHERE employeeID = \"" + this.employeeID + "\";");
+            while (rs.next()){
+                String appointmentID = rs.getString(1);
+                Appointment appointment = new Appointment(appointmentID);
+                appointments.add(appointment);
+                
+            }   
+        } catch (SQLException ex) {
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        return appointments;
+    }
+    
+    public ArrayList<Customer> getCustomers() {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("Select email FROM Customers;");
+            while (rs.next()){
+                String email = rs.getString(1);
+                Customer customer = new Customer(email);
+                customers.add(customer);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            System.out.println(ex.toString());
+        }
+        return customers;
+    }
 
+    public ArrayList<Appointment> getAppointmentsforDate(String date) {
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        try {
+            Statement s = con.createStatement();
+            String query = "SELECT appointmentID FROM Appointments WHERE (employeeID = \"" + this.employeeID + "\" AND (apptDateTime>=#" + date + " 01:00:00 AM# AND apptDateTime<=#" + date + " 11:59:00 PM#));";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()){
+                String appointmentID = rs.getString(1);
+                Appointment appointment = new Appointment(appointmentID);
+                appointments.add(appointment);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        return appointments;
+    }
+    
+    public ArrayList<Appointment> getAppointmentsforCustomer(String customerID) {
+        ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+        try {
+            Statement s = con.createStatement();
+            String query = "SELECT appointmentID FROM Appointments WHERE (employeeID = \"" + this.employeeID + "\" AND customerID = \"" + customerID + "\");";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()){
+                String appointmentID = rs.getString(1);
+                Appointment appointment = new Appointment(appointmentID);
+                appointments.add(appointment);
+                
+            }   
+        } catch (SQLException ex) {
+            System.out.println("SQL error getting appointments");
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        return appointments;
+    }
+    
 }

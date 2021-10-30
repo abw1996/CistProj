@@ -1,66 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BusinessObjects;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
- * @author dpizo
+ * @author ashto
  */
-@WebServlet(urlPatterns = {"/EmployeeLoginServlet"})
-public class EmployeeLoginServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "EditEmployeeServlet", urlPatterns = {"/EditEmployeeServlet"})
+public class EditEmployeeServlet extends HttpServlet {
+    
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String employeeID = request.getParameter("employeeID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String password = request.getParameter("password");
+        String adminAccess = request.getParameter("adminAccess");
+        
+        Employee employee = new Employee(employeeID);
+        employee.updateDB(employeeID, firstName, lastName, phoneNumber, password, adminAccess);
+    
+        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        rd.forward(request, response);
+        
         response.setContentType("text/html;charset=UTF-8");
-        
-        System.out.println("In Employee Login Servlet");
-        String idgui = request.getParameter("employeeID");
-        System.out.println("Employee Id is: " + idgui);
-        String pwgui = request.getParameter("password");
-        System.out.println("Employee Password is: " + pwgui);
-            
-        Employee employee = new Employee(idgui);
-            
-        String pwdb = employee.getPassword();
-        if(pwgui.equals(pwdb)) {
-            System.out.println("Found");
-            HttpSession session = request.getSession();
-            session.setAttribute("employee", employee);
-            RequestDispatcher rs = request.getRequestDispatcher("EmployeeAppointments.jsp");
-            rs.forward(request, response);
-            }
-            else {
-                System.out.println("Not Found");
-                RequestDispatcher rs = request.getRequestDispatcher("LoginError.html");
-                rs.forward(request, response);
-            }
-        
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             
-        }
-        catch (Exception ex) {
-            System.out.println(ex);
-        }
-        finally {
-            System.out.println("Employee Login Servlet Ending");
         }
     }
 

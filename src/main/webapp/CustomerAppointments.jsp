@@ -131,7 +131,41 @@
                 }
             %>
         </table>
-    </div>     
+        
+        <hr>
+        
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Edit Account</h1>
+                <hr>
+                <form class="text-center" action="/EditCustomerServlet" method="post">
+                    <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
+                    <label class="hire-form-text">First Name</label> <br>
+                    <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=customer.getFirstName()%>" required><br>
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="lastName" placeholder="<%=customer.getLastName()%>" required><br>                   
+                    <label class="hire-form-text">Last Name</label> <br>
+                    <input class="text-input" type="text" name="lastName" id="email" placeholder="<%=customer.getEmail()%>" required><br>
+                    <label class="hire-form-text">Phone Number</label> <br>
+                    <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="<%=customer.getPhoneNumber()%>" required><br>
+                    <label class="hire-form-text">Password</label> <br>
+                    <input class="text-input" type="password" name="password" id="password" placeholder="<%=customer.getPassword()%>" required><br>
+                    <hr>
+
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="EditCustomerSubmit">Submit Changes</label>
+                    <input class="hide" name="EditCustomerSubmit" id="EditCustomerSubmit" type="submit">
+
+                </form>
+
+            </div>
+            
+        </div>
+                    <form class="text-center" action="/DeleteCustomerServlet" method="post">
+                        <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
+                        <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteCustomerSubmit">Delete Account</label>
+                        <input class="hide" name="DeleteCustomerSubmit" id="DeleteCustomerSubmit" type="submit">
+                    </form>
+    </div>
 </body>
 <footer id="Footer"></footer>
 </html>

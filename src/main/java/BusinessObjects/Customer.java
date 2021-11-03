@@ -162,4 +162,28 @@ public class Customer {
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
+    
+      public String createID() {
+        int highest = 0;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT customerID FROM Customers;");
+            while (rs.next()){
+                int x = Integer.parseInt(rs.getString(1));
+                if (x > highest) {
+                    highest = x;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get customer data");
+        }
+        highest += 1;
+        String returnValue = String.valueOf(highest);
+        int count = 6 - returnValue.length();
+        for (int x = 0; x < count; x++) {
+            returnValue = "0" + returnValue;
+        }
+        return returnValue;
+    }
 }
+

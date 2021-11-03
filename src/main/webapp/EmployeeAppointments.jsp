@@ -344,6 +344,11 @@
             </div>
         <%}%>
         </div>
+                    <form class="text-center" action="/DeleteEmployeeServlet" method="post">
+                        <input type="hidden" value="<%=employee.getEmployeeID()%>" name="employeeID" id="employeeID">
+                        <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteEmployee">Delete Account</label>
+                        <input class="hide" name="DeleteEmployee" id="DeleteEmployee" type="submit">
+                    </form>
     </div>     
 </body>
 <footer id="Footer"></footer>

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,10 +41,12 @@ public class EditCustomerServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber");
         String password = request.getParameter("password");
         
-        Customer customer = new Customer(customerID);
-        customer.insertDB(customerID, firstName, lastName, phoneNumber, email, password);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        Customer customer = new Customer(email);
+        customer.updateDB(customerID, firstName, lastName, phoneNumber, email, password);
+        customer = new Customer(email);
+        HttpSession sess = request.getSession();
+        sess.setAttribute("customer", customer);
+        RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
         rd.forward(request, response);
         
         response.setContentType("text/html;charset=UTF-8");

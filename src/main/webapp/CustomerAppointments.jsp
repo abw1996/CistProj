@@ -47,6 +47,7 @@
             <h1 class="form-title">Create Appointment</h1>
         <form action="CreateAppointmentServlet" method="post">
             <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
+            <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
             <label class="hire-form-text">Date/Time</label> <br>
             <input class="text-input" type="datetime-local" name="dateTime" id="dateTime" value="" required><br>
             <label class="hire-form-text" for="employeeID">Stylist</label> <br>
@@ -115,6 +116,8 @@
                         <th>
                             <form action="EditAppointment.jsp" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
+                                <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
                                 <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
                             </form>
@@ -122,6 +125,8 @@
                         <th>
                             <form action="DeleteAppointmentServlet" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
+                                <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentDeleteSubmit%>">Cancel/Delete</label>
                                 <input class="hide" name="<%=appointmentDeleteSubmit%>" id="<%=appointmentDeleteSubmit%>" type="submit">
                             </form>

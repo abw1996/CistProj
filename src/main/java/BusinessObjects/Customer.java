@@ -163,7 +163,7 @@ public class Customer {
         return this.phoneNumber;
     }
     
-      public String createID() {
+    public String createID() {
         int highest = 0;
         try {
             Statement s = con.createStatement();

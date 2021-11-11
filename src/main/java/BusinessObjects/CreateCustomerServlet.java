@@ -41,7 +41,7 @@ public class CreateCustomerServlet extends HttpServlet {
         String password = request.getParameter("password");
         
         Customer customer = new Customer();
-        String customerID = customer.createID();
+        String customerID = customer.createID();        
         customer.insertDB(customerID, firstName, lastName, phoneNumber, email, password);
         
         RequestDispatcher redp = request.getRequestDispatcher("index.html");

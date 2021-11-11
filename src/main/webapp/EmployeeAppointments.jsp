@@ -214,7 +214,7 @@
 
                     <label class="hire-form-text align-self-end cursor-on-hover" for="submitEmployeeEdit">Submit Changes</label>
                     <input class="hide" name="submitEmployeeEdit" id="submitEmployeeEdit" type="submit">
-
+                     
                 </form>
 
             </div>
@@ -243,6 +243,73 @@
 
                 </form>
 
+            </div>
+            
+            <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
+                <h1 class="form-title">Add Employee to Schedule</h1>
+                <form class="text-center" action="ScheduleMakerServlet" method="post">
+                    <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
+                    <label class="hire-form-text">Day</label><br>
+                    <input class="text-input" type="date" name="date" id="date" required=""><br>
+                    <label class="hire-form-text">Employee</label><br>
+                    <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
+                        <%
+                            for (int x = 0; x < employees.size(); x++) {
+                                %>
+                                <option value="<%=employees.get(x).getEmployeeID()%>"><%out.println(employees.get(x).getFirstName() + " " + employees.get(x).getLastName());%></option>
+                                <%
+                            }
+                        %>
+                    </select><br>
+                    <label class="hire-form-text">Start Time</label><br>
+                    <select class="text-input" type="text" name="startTime" id="startTime" value="" required>
+                        <option value="07:00">7 am</option>
+                        <option value="07:00">7:30 am</option>
+                        <option value="07:00">8 am</option>
+                        <option value="07:00">8:30 am</option>
+                        <option value="07:00">9 am</option>
+                        <option value="07:00">9:30 am</option>
+                        <option value="07:00">10 am</option>
+                        <option value="07:00">10:30 am</option>
+                        <option value="07:00">11 am</option>
+                        <option value="07:00">11:30 am</option>
+                        <option value="07:00">12 pm</option>
+                        <option value="07:00">12:30 pm</option>
+                        <option value="07:00">1 pm</option>
+                        <option value="07:00">1:30 pm</option>
+                        <option value="07:00">2 pm</option>
+                        <option value="07:00">2:30 pm</option>
+                        <option value="07:00">3 pm</option>
+                        <option value="07:00">3:30 pm</option>
+                        <option value="07:00">4 pm</option>
+                    </select><br>
+                    <label class="hire-form-text">End Time</label><br>
+                    <select class="text-input" type="text" name="endTime" id="endTime" value="" required>
+                        <option value="07:00">7 am</option>
+                        <option value="07:00">7:30 am</option>
+                        <option value="07:00">8 am</option>
+                        <option value="07:00">8:30 am</option>
+                        <option value="07:00">9 am</option>
+                        <option value="07:00">9:30 am</option>
+                        <option value="07:00">10 am</option>
+                        <option value="07:00">10:30 am</option>
+                        <option value="07:00">11 am</option>
+                        <option value="07:00">11:30 am</option>
+                        <option value="07:00">12 pm</option>
+                        <option value="07:00">12:30 pm</option>
+                        <option value="07:00">1 pm</option>
+                        <option value="07:00">1:30 pm</option>
+                        <option value="07:00">2 pm</option>
+                        <option value="07:00">2:30 pm</option>
+                        <option value="07:00">3 pm</option>
+                        <option value="07:00">3:30 pm</option>
+                        <option value="07:00">4 pm</option>
+                    </select><br>
+                    <hr>
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="submitCreateSchedule">Create</label>
+                    <input class="hide" name="submitCreateSchedule" id="submitCreateSchedule" type="submit">
+                </form>
+                
             </div>
             
             

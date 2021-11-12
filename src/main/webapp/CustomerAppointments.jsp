@@ -58,7 +58,7 @@
                 %>
             </select>
                 <br>
-            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>
+            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Continue</label>
             <input class="hide" name="submit" id="submit" type="submit">
             </form>
         </div>
@@ -92,7 +92,7 @@
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
                                 <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
                                 <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
-                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Change Service</label>
                                 <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
                             </form>
                         </th>

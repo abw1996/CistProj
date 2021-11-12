@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /*
@@ -176,6 +178,94 @@ public class Employee {
         }
         return appointments;
     }
+    
+    public ArrayList<String> getDays(String employeeID) {
+        ArrayList<String> days = new ArrayList<String>();
+        try {
+            Statement s = con.createStatement();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");  
+            LocalDateTime now = LocalDateTime.now();
+            String today = dtf.format(now);
+            String query = "Select day FROM Schedule WHERE employeeID = \"" + employeeID + "\" AND day >= #" + today + "# ORDER BY day ASC;";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()){
+                String day = rs.getString(1);
+                day = day.substring(0, day.length()-16);
+                days.add(day);
+            }   
+        } catch (SQLException ex) {
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        return days;
+    }
+    
+    public ArrayList<String> getTimes(String employeeID, String day) {
+        ArrayList<String> times = new ArrayList<String>();
+        ArrayList<String> allTimesForDay = new ArrayList<String>();
+        ArrayList<String> allTimesTaken = new ArrayList<String>();
+        String startTime = "";
+        String endTime = "";
+        try {
+            Statement s = con.createStatement();
+            String query = "Select startTime, endTime FROM Schedule WHERE employeeID = \"" + employeeID + "\" AND day = #" + day + "#;";
+            ResultSet rs = s.executeQuery(query);
+            while (rs.next()){
+                startTime = rs.getString(1);
+                endTime = rs.getString(2);
+                startTime = startTime.substring(11, startTime.length()-7);
+                endTime = endTime.substring(11, endTime.length()-7);
+            }   
+        } catch (SQLException ex) {
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        
+        try {
+            Statement x = con.createStatement();
+            String query = "Select apptDateTime FROM Appointments WHERE employeeID = \"" + employeeID + "\" AND apptDateTime > #" + day + " 00:00:00# AND apptDateTime < #" + day + " 23:00:00# ORDER BY apptDateTime ASC;";
+            ResultSet rs = x.executeQuery(query);
+            while (rs.next()){
+                String apptDateTime = rs.getString(1);
+                String apptTime = apptDateTime.substring(11, apptDateTime.length()-7);
+                allTimesTaken.add(apptTime);
+            }   
+        } catch (SQLException ex) {
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+        
+        int startInt = Integer.parseInt(startTime.substring(0,2));
+        int endInt = Integer.parseInt(endTime.substring(0,2));
+        
+        for (int x = startInt; x <= endInt; x++) {
+            String timeString;
+            if (x < 10) {
+                timeString = "0" + String.valueOf(x) + ":00:00";
+            } else {
+                timeString = String.valueOf(x) + ":00:00";
+            }
+            allTimesForDay.add(timeString);
+        }
+        
+        
+        
+        for (int x = 0; x < allTimesForDay.size(); x++) {
+            boolean timeTaken = false;
+            for (int y = 0; y < allTimesTaken.size(); y++) {
+                if (allTimesForDay.get(x).equals(allTimesTaken.get(y))) {
+                    timeTaken = true;
+                }
+            }
+            if (!timeTaken) {
+                times.add(allTimesForDay.get(x));
+            }
+        }
+        
+        return times;
+    }
+    
+    
     
     public ArrayList<Customer> getCustomers() {
         ArrayList<Customer> customers = new ArrayList<Customer>();

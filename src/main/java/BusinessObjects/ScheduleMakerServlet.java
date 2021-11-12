@@ -7,11 +7,13 @@ package BusinessObjects;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +34,22 @@ public class ScheduleMakerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String currentEmployee = request.getParameter("currentEmployeeID");
+        String date = request.getParameter("date");
+        String employeeID = request.getParameter("employeeID");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        
+        ScheduledDay day = new ScheduledDay();
+        day.insertDB(date, employeeID, startTime, endTime);
+        Employee employee = new Employee(currentEmployee);
+        HttpSession sess = request.getSession();
+        sess.setAttribute("employee", employee);
+        
+        RequestDispatcher rs = request.getRequestDispatcher("EmployeeAppointments.jsp");
+        rs.forward(request, response);
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

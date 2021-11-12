@@ -4,6 +4,7 @@
     Author     : ashto
 --%>
 
+<%@page import="BusinessObjects.ScheduledDay"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="BusinessObjects.Customer"%>
 <%@page import="BusinessObjects.Appointment"%>
@@ -48,7 +49,7 @@
             <h1 class="form-title">Create Appointment</h1>
         <form action="CreateAppointmentServlet" method="post">
             <input type="hidden" name="isCustomer" id="isCustomer" value="FALSE">
-            <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+            <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
             <label class="hire-form-text">Customer</label><br>
             <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
                 <%
@@ -263,47 +264,36 @@
                     </select><br>
                     <label class="hire-form-text">Start Time</label><br>
                     <select class="text-input" type="text" name="startTime" id="startTime" value="" required>
-                        <option value="07:00">7 am</option>
-                        <option value="07:00">7:30 am</option>
-                        <option value="07:00">8 am</option>
-                        <option value="07:00">8:30 am</option>
-                        <option value="07:00">9 am</option>
-                        <option value="07:00">9:30 am</option>
-                        <option value="07:00">10 am</option>
-                        <option value="07:00">10:30 am</option>
-                        <option value="07:00">11 am</option>
-                        <option value="07:00">11:30 am</option>
-                        <option value="07:00">12 pm</option>
-                        <option value="07:00">12:30 pm</option>
-                        <option value="07:00">1 pm</option>
-                        <option value="07:00">1:30 pm</option>
-                        <option value="07:00">2 pm</option>
-                        <option value="07:00">2:30 pm</option>
-                        <option value="07:00">3 pm</option>
-                        <option value="07:00">3:30 pm</option>
-                        <option value="07:00">4 pm</option>
+                        <option value="07:00:00">7 am</option>
+                        <option value="08:00:00">8 am</option>
+                        <option value="09:00:00">9 am</option>
+                        <option value="10:00:00">10 am</option>
+                        <option value="11:00:00">11 am</option>
+                        <option value="12:00:00">12 pm</option>
+                        <option value="13:00:00">1 pm</option>
+                        <option value="14:00:00">2 pm</option>
+                        <option value="15:00:00">3 pm</option>
+                        <option value="16:00:00">4 pm</option>
+                        <option value="17:00:00">5 pm</option>
+                        <option value="18:00:00">6 pm</option>
+                        <option value="19:00:00">7 pm</option>
+                        
                     </select><br>
                     <label class="hire-form-text">End Time</label><br>
                     <select class="text-input" type="text" name="endTime" id="endTime" value="" required>
-                        <option value="07:00">7 am</option>
-                        <option value="07:00">7:30 am</option>
-                        <option value="07:00">8 am</option>
-                        <option value="07:00">8:30 am</option>
-                        <option value="07:00">9 am</option>
-                        <option value="07:00">9:30 am</option>
-                        <option value="07:00">10 am</option>
-                        <option value="07:00">10:30 am</option>
-                        <option value="07:00">11 am</option>
-                        <option value="07:00">11:30 am</option>
-                        <option value="07:00">12 pm</option>
-                        <option value="07:00">12:30 pm</option>
-                        <option value="07:00">1 pm</option>
-                        <option value="07:00">1:30 pm</option>
-                        <option value="07:00">2 pm</option>
-                        <option value="07:00">2:30 pm</option>
-                        <option value="07:00">3 pm</option>
-                        <option value="07:00">3:30 pm</option>
-                        <option value="07:00">4 pm</option>
+                        <option value="07:00:00">7 am</option>
+                        <option value="08:00:00">8 am</option>
+                        <option value="09:00:00">9 am</option>
+                        <option value="10:00:00">10 am</option>
+                        <option value="11:00:00">11 am</option>
+                        <option value="12:00:00">12 pm</option>
+                        <option value="13:00:00">1 pm</option>
+                        <option value="14:00:00">2 pm</option>
+                        <option value="15:00:00">3 pm</option>
+                        <option value="16:00:00">4 pm</option>
+                        <option value="17:00:00">5 pm</option>
+                        <option value="18:00:00">6 pm</option>
+                        <option value="19:00:00">7 pm</option>
                     </select><br>
                     <hr>
                     <label class="hire-form-text align-self-end cursor-on-hover" for="submitCreateSchedule">Create</label>
@@ -423,6 +413,33 @@
 
             </div>
         <%}%>
+        
+        <hr>
+        <div class="text-center col-12 container">
+            <h1 class="form-title">Schedule</h1>
+        <table style="margin-bottom: 100px;">
+            <tr>
+                <th class="text-center">Day</th>
+                <th class="text-center">Employee</th>
+                <th class="text-center">Start</th>
+                <th class="text-center">End</th>
+            </tr>
+            <%
+                ScheduledDay schedule = new ScheduledDay();
+                ArrayList<ScheduledDay> schedules = schedule.getDays();
+            for(int x = 0; x < schedules.size(); x++) {
+                %>
+                <tr>
+                    <th class="text-center"><%out.println(schedules.get(x).getDate().substring(0, schedules.get(x).getDate().length()-16));%></th> 
+                    <th class="text-center"><%out.println(schedules.get(x).getEmployeeID());%></th> 
+                    <th class="text-center"><%out.println(schedules.get(x).getStartTime().substring(11, schedules.get(x).getStartTime().length()-7));%></th> 
+                    <th class="text-center"><%out.println(schedules.get(x).getEndTime().substring(11, schedules.get(x).getEndTime().length()-7));%></th> 
+                </tr>
+                <%
+            }
+            %>
+        </table>
+        </div>
         </div>
     </div>     
 </body>

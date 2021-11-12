@@ -37,10 +37,12 @@ public class EditAppointmentServlet extends HttpServlet {
         String employeeID = request.getParameter("employeeID");
         String procCode = request.getParameter("procedureID");
         
+        appointment.updateDB(appointmentID, apptDateTime, employeeID, procCode);
+        
         RequestDispatcher rd = request.getRequestDispatcher("index.html");
         rd.forward(request, response);
         
-        appointment.updateDB(appointmentID, apptDateTime, employeeID, procCode);
+        
         
         try (PrintWriter out = response.getWriter()) {
             

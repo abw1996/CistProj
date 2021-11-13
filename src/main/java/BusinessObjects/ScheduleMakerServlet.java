@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BusinessObjects;
 
 import java.io.IOException;
@@ -8,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author dpizo
+ * @author ashto
  */
-@WebServlet(urlPatterns = {"/EditAppointmentServlet"})
-public class EditAppointmentServlet extends HttpServlet {
+@WebServlet(name = "ScheduleMakerServlet", urlPatterns = {"/ScheduleMakerServlet"})
+public class ScheduleMakerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,37 +35,33 @@ public class EditAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        String appointmentID = request.getParameter("appointmentID");
-        Appointment appointment = new Appointment(appointmentID);
-        String apptDateTime = request.getParameter("dateTime");
+        String currentEmployee = request.getParameter("currentEmployeeID");
+        String date = request.getParameter("date");
         String employeeID = request.getParameter("employeeID");
-        String procCode = request.getParameter("procedureID");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
         
-        appointment.updateDB(appointmentID, apptDateTime, employeeID, procCode);
+        ScheduledDay day = new ScheduledDay();
+        day.insertDB(date, employeeID, startTime, endTime);
+        Employee employee = new Employee(currentEmployee);
+        HttpSession sess = request.getSession();
+        sess.setAttribute("employee", employee);
         
-        if (request.getParameter("isCustomer").equals("TRUE")) {
-            Customer customer = new Customer(request.getParameter("customerEmail"));
-            RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
-            rd.forward(request, response);
-        } else {
-            Employee employee = new Employee(request.getParameter("currentEmployeeID"));
-            RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
-            rd.forward(request, response);
-        }
-        
-        RequestDispatcher rd = request.getRequestDispatcher("index.html");
-        rd.forward(request, response);
-        
-        
+        RequestDispatcher rs = request.getRequestDispatcher("EmployeeAppointments.jsp");
+        rs.forward(request, response);
         
         try (PrintWriter out = response.getWriter()) {
-            
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ScheduleMakerServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ScheduleMakerServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        catch (Exception ex) {
-            System.out.println(ex);
-    }
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -88,6 +88,19 @@ public class Customer {
             System.out.println(ex.toString());
         }
     }
+    
+    public void updateDB(String customerID, String firstName, String lastName, String phoneNumber, String email, String password) {
+        try {
+            Statement s = con.createStatement();
+            String query = "UPDATE Customers " +
+                            "SET firstName = \"" + firstName + "\", lastName = \"" + lastName + "\", phoneNumber = \"" + phoneNumber + "\", email = \"" + email + "\", password = \"" + password + "\" " +
+                            "WHERE customerID = \"" + customerID + "\";";
+            s.executeUpdate(query);
+        } catch (SQLException ex) {
+            String exString = ex.toString();
+            System.out.println(exString);
+        }
+    }
 
     public void deleteDB(String customerID) {
         try {
@@ -161,5 +174,30 @@ public class Customer {
     
     public String getPhoneNumber() {
         return this.phoneNumber;
+    }
+    
+    public String createID() {
+        int highest = 0;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT customerID FROM Customers;");
+            while (rs.next()){
+                int x = Integer.parseInt(rs.getString(1).substring(1));
+                if (x > highest) {
+                    highest = x;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get customer data");
+        }
+       
+        String empStartValue = "C";
+        String returnValue = String.valueOf(highest + 1);
+        int count = 5 - returnValue.length();
+        for (int x = 0; x < count; x++) {
+            empStartValue += "0";
+        }
+        empStartValue += returnValue;
+        return empStartValue;
     }
 }

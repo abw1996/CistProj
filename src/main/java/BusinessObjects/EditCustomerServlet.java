@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BusinessObjects;
 
 import java.io.IOException;
@@ -8,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author dpizo
+ * @author ashto
  */
-@WebServlet(urlPatterns = {"/EditAppointmentServlet"})
-public class EditAppointmentServlet extends HttpServlet {
+@WebServlet(name = "EditCustomerServlet", urlPatterns = {"/EditCustomerServlet"})
+public class EditCustomerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,39 +33,26 @@ public class EditAppointmentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
+        String customerID = request.getParameter("customerID");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String password = request.getParameter("password");
         
-        String appointmentID = request.getParameter("appointmentID");
-        Appointment appointment = new Appointment(appointmentID);
-        String apptDateTime = request.getParameter("dateTime");
-        String employeeID = request.getParameter("employeeID");
-        String procCode = request.getParameter("procedureID");
-        
-        appointment.updateDB(appointmentID, apptDateTime, employeeID, procCode);
-        
-        if (request.getParameter("isCustomer").equals("TRUE")) {
-            Customer customer = new Customer(request.getParameter("customerEmail"));
-            RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
-            rd.forward(request, response);
-        } else {
-            Employee employee = new Employee(request.getParameter("currentEmployeeID"));
-            RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
-            rd.forward(request, response);
-        }
-        
-        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        Customer customer = new Customer(email);
+        customer.updateDB(customerID, firstName, lastName, phoneNumber, email, password);
+        customer = new Customer(email);
+        HttpSession sess = request.getSession();
+        sess.setAttribute("customer", customer);
+        RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
         rd.forward(request, response);
         
-        
-        
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
         }
-        catch (Exception ex) {
-            System.out.println(ex);
-    }
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,8 +36,10 @@ public class EditEmployeeServlet extends HttpServlet {
         
         Employee employee = new Employee(employeeID);
         employee.updateDB(employeeID, firstName, lastName, phoneNumber, password, adminAccess);
-    
-        RequestDispatcher rd = request.getRequestDispatcher("index.html");
+        employee = new Employee(request.getParameter("currentEmployeeID"));
+        HttpSession sess = request.getSession();
+        sess.setAttribute("employee", employee);
+        RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
         rd.forward(request, response);
         
         response.setContentType("text/html;charset=UTF-8");

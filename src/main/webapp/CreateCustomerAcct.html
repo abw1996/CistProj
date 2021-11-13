@@ -25,17 +25,18 @@
     <div class="col-lg-6 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px;">
         <h1 class="form-title">Create Account</h1>
         <hr>
-    <form class="text-center" action="/CreateCustomerServlet" method="post">
+    <form class="text-center" action="CreateCustomerServlet" method="post">
+        <input class="text-input" type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
         <label class="hire-form-text">First Name</label> <br>
-        <input class="text-input" type="text" name="firstName" id="firstName" required><br>
+        <input class="text-input" type="text" name="firstName" id="firstName" value="" required><br>
         <label class="hire-form-text">Last Name</label> <br>
-        <input class="text-input" type="text" name="lastName" id="lastName" required><br>
+        <input class="text-input" type="text" name="lastName" id="lastName" value="" required><br>
         <label class="hire-form-text">Email</label> <br>
-        <input class="text-input" type="email" name="email" id="email" required><br>
+        <input class="text-input" type="email" name="email" id="email" value="" required><br>
         <label class="hire-form-text">Phone Number</label> <br>
-        <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" required><br>
+        <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" value="" required><br>
         <label class="hire-form-text">Password</label> <br>
-        <input class="text-input" type="password" name="password" id="password" required><br>
+        <input class="text-input" type="password" name="password" id="password" value="" required><br>
         <hr>
                 
                         <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>

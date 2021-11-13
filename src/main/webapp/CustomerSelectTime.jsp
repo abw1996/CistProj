@@ -1,14 +1,19 @@
+<%-- 
+    Document   : CustomerSelectTime
+    Created on : Nov 12, 2021, 4:11:51 PM
+    Author     : ashto
+--%>
 
 
+<%@page import="BusinessObjects.Appointment"%>
+<%@page import="BusinessObjects.Employee"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="BusinessObjects.Customer"%>
-<%@page import="BusinessObjects.Appointment"%>
-<%@page import="BusinessObjects.Procedure"%>
-<%@page import="BusinessObjects.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <head>
         <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curl Me Crazy</title>
@@ -26,37 +31,41 @@
         });
         </script>
     </head>
-    
-    <%
-       String appointmentID = request.getParameter("appointmentID");
-       String isCustomer = request.getParameter("isCustomer");
-       Appointment appointment = new Appointment(appointmentID);
-       Employee employeeGetter = new Employee();
-        ArrayList<Employee> employees = employeeGetter.getEmployees();
+    </head>
+   <%
+        Customer customer = new Customer((String) request.getParameter("customerEmail"));
+        Employee employee = new Employee((String) request.getParameter("employeeID"));
+        String day = (String) request.getParameter("day");
+        ArrayList<String> times = employee.getTimes(employee.getEmployeeID(), day);
     %>
     
     <body>
     <div id="Header"></div>
-    <div class="row justify-content-center">
+    <div class="container text-center">
+        <div class="row justify-content-center">
         <div class="col-lg-6 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px;">
-            <h1 class="form-title">Edit Appointment</h1>
-            <hr>
-            <form action="EditAppointmentServlet" method="post">
-                <input type="hidden" value="<%=appointment.getAppointmentID()%>" name="appointmentID" id="appointmentID"> 
-            <input class="text-input" type="hidden" name="dateTime" id="dateTime" value="<%=appointment.getAppointmentDateTime()%>" required><br>
-            <input class="text-input" type="hidden" name="isCustomer" id="isCustomer" value="<%=isCustomer%>">
-            <%
-            if (isCustomer.equals("TRUE")) {
-                String customerEmail = request.getParameter("customerEmail");
-                %> <input class="text-input" type="hidden" name="customerEmail" id="customerEmail" value="<%=customerEmail%>"> <%
-            } else {
-                String currentEmployeeID = request.getParameter("currentEmployeeID");
-                %> <input class="text-input" type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=currentEmployeeID%>"> <%
-            }
-            %>
-            <input class="text-input" type="hidden" name="employeeID" id="employeeID" value="<%=appointment.getEmployeeID()%>" required>
+            <h1 class="form-title">Create Appointment</h1>
+        <form action="CreateAppointmentServlet" method="post">
+            <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
+            <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
+            <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
+            <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+            <label class="hire-form-text" for="employeeID">Stylist - <%out.println(employee.getFirstName() + " " + employee.getLastName());%></label> <br>
+            <label class="hire-form-text">Day - <%out.println(day);%></label><br>
+            <br>
+            <label class="hire-form-text">Time</label><br>
+            <select class="text-input" type="text" name="dateTime" id="dateTime">
+            
+                <%
+                    for (int x = 0; x < times.size(); x++) {
+                        %>
+                        <option value="<%=(day + " " + times.get(x))%>"><%out.println(times.get(x));%></option>
+                        <%
+                    }
+                %>
+            </select><br>
             <label class="hire-form-text">Service</label> <br>
-            <select class="text-input" type="text" name="procedureID" id="procedureID" required>
+            <select class="text-input" type="text" name="procedureID" id="procedureID" value="" required>
                 <option value="P0001">Kids Cut</option>
                 <option value="P0002">Shampoo and Blowdry</option>
                 <option value="P0003">Color and Cut</option>
@@ -78,11 +87,12 @@
                 <option value="P0019">Beard Trim</option>
                 <option value="P0020">Mens Shave</option>
             </select><br><hr>
-            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Submit Change</label>
+
+            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>
             <input class="hide" name="submit" id="submit" type="submit">
             </form>
-        </div>     
+        </div>
+        </div>
     </div>
-</body>
-<footer id="Footer"></footer>
+    </body>
 </html>

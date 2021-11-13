@@ -45,10 +45,8 @@
         <div class="row justify-content-center">
         <div class="col-lg-6 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px;">
             <h1 class="form-title">Create Appointment</h1>
-        <form action="CreateAppointmentServlet" method="post">
-            <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
-            <label class="hire-form-text">Date/Time</label> <br>
-            <input class="text-input" type="datetime-local" name="dateTime" id="dateTime" value="" required><br>
+        <form action="CustomerCreateAppointment.jsp" method="post">
+            <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
             <label class="hire-form-text" for="employeeID">Stylist</label> <br>
             <select class="text-input" type="text" name="employeeID" id="employeeID" value="" required>
                 <%
@@ -60,30 +58,7 @@
                 %>
             </select>
                 <br>
-            <label class="hire-form-text">Service</label> <br>
-            <select class="text-input" type="text" name="procedureID" id="procedureID" value="" required>
-                <option value="P0001">Kids Cut</option>
-                <option value="P0002">Shampoo and Blowdry</option>
-                <option value="P0003">Color and Cut</option>
-                <option value="P0004">Color-Retouch and Cut</option>
-                <option value="P0005">Color, Highlights, and Cut</option>
-                <option value="P0006">Color Correction</option>
-                <option value="P0007">Perm and Cut</option>
-                <option value="P0008">Extensions</option>
-                <option value="P0009">Ultimate Curl</option>
-                <option value="P0010">Ultimate Brow</option>
-                <option value="P0011">Hydration Facial</option>
-                <option value="P0012">Steam Facial</option>
-                <option value="P0013">Lash Tint</option>
-                <option value="P0014">Serum</option>
-                <option value="P0015">Chemical Peel</option>
-                <option value="P0016">Vitamin C Facial</option>
-                <option value="P0017">Acne Elimination</option>
-                <option value="P0018">Lip Wax</option>
-                <option value="P0019">Beard Trim</option>
-                <option value="P0020">Mens Shave</option>
-            </select><br><hr>
-            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Create</label>
+            <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Continue</label>
             <input class="hide" name="submit" id="submit" type="submit">
             </form>
         </div>
@@ -115,13 +90,17 @@
                         <th>
                             <form action="EditAppointment.jsp" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
-                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
+                                <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
+                                <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
+                                <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Change Service</label>
                                 <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
                             </form>
                         </th>
                         <th>
                             <form action="DeleteAppointmentServlet" method="post">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
+                                <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
+                                <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentDeleteSubmit%>">Cancel/Delete</label>
                                 <input class="hide" name="<%=appointmentDeleteSubmit%>" id="<%=appointmentDeleteSubmit%>" type="submit">
                             </form>
@@ -138,14 +117,16 @@
             <div class="col-lg-12 col-sm-12 prettify-box-blue justify-content-center text-center" style="padding: 30px; margin: 30px;">
                 <h1 class="form-title">Edit Account</h1>
                 <hr>
-                <form class="text-center" action="/EditCustomerServlet" method="post">
-                    <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
+                <form class="text-center" action="EditCustomerServlet" method="post">
+                    <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
+                    <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
+                    <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=customer.getFirstName()%>" required><br>
                     <label class="hire-form-text">Last Name</label> <br>
                     <input class="text-input" type="text" name="lastName" id="lastName" placeholder="<%=customer.getLastName()%>" required><br>                   
-                    <label class="hire-form-text">Last Name</label> <br>
-                    <input class="text-input" type="text" name="lastName" id="email" placeholder="<%=customer.getEmail()%>" required><br>
+                    <label class="hire-form-text">Email</label> <br>
+                    <input class="text-input" type="text" name="email" id="email" placeholder="<%=customer.getEmail()%>" required><br>
                     <label class="hire-form-text">Phone Number</label> <br>
                     <input class="text-input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="<%=customer.getPhoneNumber()%>" required><br>
                     <label class="hire-form-text">Password</label> <br>
@@ -160,8 +141,9 @@
             </div>
             
         </div>
-                    <form class="text-center" action="/DeleteCustomerServlet" method="post">
+                    <form class="text-center" action="DeleteCustomerServlet" method="post">
                         <input type="hidden" value="<%=customer.getCustomerID()%>" name="customerID" id="customerID">
+                        <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                         <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteCustomerSubmit">Delete Account</label>
                         <input class="hide" name="DeleteCustomerSubmit" id="DeleteCustomerSubmit" type="submit">
                     </form>

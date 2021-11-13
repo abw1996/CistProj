@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author dpizo
@@ -27,15 +28,42 @@ public class CreateAppointmentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String apptDateTime = request.getParameter("dateTime");
-        apptDateTime = apptDateTime.replace("T", " ") + ":00";
-        String employeeID = request.getParameter("employeeID");
-        String customerID = request.getParameter("customerID");
-        String procCode = request.getParameter("procedureID");
-            
-        Appointment appointment = new Appointment();
-        String apptID = appointment.createID();
-        appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
+       
+        String isCustomer = request.getParameter("isCustomer");
+        String apptDateTime;
+        String employeeID;
+        String customerID;
+        String procCode;
+        if (isCustomer.equals("TRUE")) {
+            apptDateTime = request.getParameter("dateTime");
+            employeeID = request.getParameter("employeeID");
+            customerID = request.getParameter("customerID");
+            procCode = request.getParameter("procedureID");
+            Appointment appointment = new Appointment();
+            String apptID = appointment.createID();
+            appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
+            Customer customer = new Customer(request.getParameter("customerEmail"));
+            HttpSession sess = request.getSession();
+            sess.setAttribute("customer", customer);
+            RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
+            rd.forward(request, response);
+        
+        } else {
+            apptDateTime = request.getParameter("dateTime");
+            apptDateTime = apptDateTime.replace("T", " ") + ":00";
+            employeeID = request.getParameter("employeeID");
+            customerID = request.getParameter("customerID");
+            procCode = request.getParameter("procedureID");
+            Appointment appointment = new Appointment();
+            String apptID = appointment.createID();
+            appointment.insertDB(apptID, apptDateTime, employeeID, procCode, customerID);
+            String currentEmployee = request.getParameter("currentEmployeeID");
+            Employee employee = new Employee(currentEmployee);
+            HttpSession sess = request.getSession();
+            sess.setAttribute("employee", employee);
+            RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
+            rd.forward(request, response);
+        }
             
         RequestDispatcher rd = request.getRequestDispatcher("index.html");
         rd.forward(request, response);

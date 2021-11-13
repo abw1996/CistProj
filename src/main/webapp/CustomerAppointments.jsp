@@ -119,6 +119,7 @@
                 <hr>
                 <form class="text-center" action="EditCustomerServlet" method="post">
                     <input type="hidden" name="customerEmail" id="customerEmail" value="<%=customer.getEmail()%>">
+                    <input type="hidden" name="customerID" id="customerID" value="<%=customer.getCustomerID()%>">
                     <input type="hidden" name="isCustomer" id="isCustomer" value="TRUE">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=customer.getFirstName()%>" required><br>

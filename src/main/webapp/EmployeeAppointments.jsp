@@ -166,7 +166,7 @@
                         <th>
                             <form action="EditAppointment.jsp" method="post">
                                 <input type="hidden" name="isCustomer" id="isCustomer" value="FALSE">
-                                <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                                <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentSubmit%>">Make Changes</label>
                                 <input class="hide" name="<%=appointmentSubmit%>" id="<%=appointmentSubmit%>" type="submit">
@@ -175,7 +175,7 @@
                         <th>
                             <form action="DeleteAppointmentServlet" method="post">
                                 <input type="hidden" name="isCustomer" id="isCustomer" value="FALSE">
-                                <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                                <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                                 <input type="hidden" name="appointmentID" id="appointmentID" value="<%=appointment.getAppointmentID()%>">
                                 <label class="hire-form-text align-self-end cursor-on-hover" for="<%=appointmentDeleteSubmit%>">Cancel/Delete</label>
                                 <input class="hide" name="<%=appointmentDeleteSubmit%>" id="<%=appointmentDeleteSubmit%>" type="submit">
@@ -193,6 +193,7 @@
                 <h1 class="form-title">Edit My Account</h1>
                 <hr>
                 <form class="text-center" action="EditEmployeeServlet" method="post">
+                    <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                     <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" placeholder="<%=employee.getFirstName()%>" required><br>
@@ -224,16 +225,17 @@
                 <h1 class="form-title">Add New Employee</h1>
                 <hr>
                 <form class="text-center" action="CreateEmployeeServlet" method="post">
+                    <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" required><br>
                     <label class="hire-form-text">Last Name</label> <br>
                     <input class="text-input" type="text" name="lastName" id="lastName" required><br>
                     <label class="hire-form-text">Phone Number</label> <br>
-                    <input class="text-input" type="tel" name="phoneNumber" id="employeePN" required><br>
+                    <input class="text-input" type="tel" name="employeePN" id="employeePN" required><br>
                     <label class="hire-form-text">Password</label> <br>
-                    <input class="text-input" type="password" name="password" id="employeePW" required><br>
+                    <input class="text-input" type="password" name="employeePW" id="employeePW" required><br>
                     <label class="hire-form-text">Admin Access</label> <br>
-                    <select class="text-input" type="text" name="adminAccess" id="adminAccess" value="" required>
+                    <select class="text-input" type="text" name="adminAccess" id="adminAccess" required>
                         <option value="true">true</option>
                         <option value="false">false</option>
                     </select><br><br>
@@ -309,7 +311,7 @@
                 <hr>
                 <form class="text-center" action="CreateCustomerServlet" method="post">
                     <input type="hidden" name="isCustomer" id="isCustomer" value="FALSE">
-                    <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                    <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                     <label class="hire-form-text">First Name</label> <br>
                     <input class="text-input" type="text" name="firstName" id="firstName" required><br>
                     <label class="hire-form-text">Last Name</label> <br>
@@ -323,7 +325,7 @@
                     <hr>
 
                     <label class="hire-form-text align-self-end cursor-on-hover" for="submitCreateCustomer">Create</label>
-                    <input class="hide" name="submitCreateCustomer" id="submit" type="submitCreateCustomer">
+                    <input class="hide" name="submitCreateCustomer" id="submitCreateCustomer" type="submit">
 
                 </form>
 
@@ -334,7 +336,7 @@
                 <hr>
                 <form class="text-center" action="DeleteCustomerServlet" method="post">
                     <input type="hidden" name="isCustomer" id="isCustomer" value="FALSE">
-                    <input type="hidden" name="employeeID" id="employeeID" value="<%=employee.getEmployeeID()%>">
+                    <input type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=employee.getEmployeeID()%>">
                     <label class="hire-form-text">Customer</label><br>
                     <select class="text-input" type="text" name="customerID" id="customerID" value="" required>
                         <%
@@ -346,8 +348,8 @@
                         %>
                     </select>
 
-                    <label class="hire-form-text align-self-end cursor-on-hover" for="submit">Delete</label>
-                    <input class="hide" name="DeleteCustomerSubmit" id="submit" type="DeleteCustomerSubmit">
+                    <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteCustomerSubmit">Delete</label>
+                    <input class="hide" name="DeleteCustomerSubmit" id="DeleteCustomerSubmit" type="submit">
 
                 </form>
                     
@@ -366,7 +368,7 @@
                     </select>
 
                     <label class="hire-form-text align-self-end cursor-on-hover" for="DeleteEmployeeSubmit">Delete</label>
-                    <input class="hide" name="DeleteEmployeeSubmit" id="submit" type="DeleteEmployeeSubmit">
+                    <input class="hide" name="DeleteEmployeeSubmit" id="DeleteEmployeeSubmit" type="submit">
 
                 </form>
 

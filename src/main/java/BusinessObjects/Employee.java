@@ -325,4 +325,29 @@ public class Employee {
         return appointments;
     }
     
+    public String createID() {
+        int highest = 0;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT employeeID FROM Employees;");
+            while (rs.next()){
+                int x = Integer.parseInt(rs.getString(1).substring(1));
+                if (x > highest) {
+                    highest = x;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get customer data");
+        }
+        
+        String empStartValue = "E";
+        String returnValue = String.valueOf(highest + 1);
+        int count = 5 - returnValue.length();
+        for (int x = 0; x < count; x++) {
+            empStartValue += "0";
+        }
+        empStartValue += returnValue;
+        return empStartValue;
+    }
+    
 }

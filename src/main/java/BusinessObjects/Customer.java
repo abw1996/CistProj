@@ -82,8 +82,7 @@ public class Customer {
     public void insertDB(String customerID, String firstName, String lastName, String phoneNumber, String email, String password) {
         try {
             Statement s = con.createStatement();
-            String query = "INSERT INTO Customers VALUES (\"" + customerID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber + "\", \"" + email + "\", \"" + password + "\");";
-            s.executeUpdate(query);
+            s.executeUpdate("INSERT INTO Customers VALUES (\"" + customerID + "\", \"" + firstName + "\", \""+ lastName + "\", \"" + phoneNumber + "\", \"" + email + "\", \"" + password + "\");");
         } catch (SQLException ex) {
             System.out.println("Failed to insert customer data");
             System.out.println(ex.toString());
@@ -98,7 +97,6 @@ public class Customer {
                             "WHERE customerID = \"" + customerID + "\";";
             s.executeUpdate(query);
         } catch (SQLException ex) {
-            System.out.println("Failed to delete employee data");
             String exString = ex.toString();
             System.out.println(exString);
         }
@@ -176,5 +174,30 @@ public class Customer {
     
     public String getPhoneNumber() {
         return this.phoneNumber;
+    }
+    
+    public String createID() {
+        int highest = 0;
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT customerID FROM Customers;");
+            while (rs.next()){
+                int x = Integer.parseInt(rs.getString(1).substring(1));
+                if (x > highest) {
+                    highest = x;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get customer data");
+        }
+       
+        String empStartValue = "C";
+        String returnValue = String.valueOf(highest + 1);
+        int count = 5 - returnValue.length();
+        for (int x = 0; x < count; x++) {
+            empStartValue += "0";
+        }
+        empStartValue += returnValue;
+        return empStartValue;
     }
 }

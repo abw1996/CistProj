@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -32,6 +33,21 @@ public class DeleteAppointmentServlet extends HttpServlet {
             String apptID = request.getParameter("appointmentID");
             Appointment appointment = new Appointment();
             appointment.deleteDB(apptID);
+            
+            if (request.getParameter("isCustomer").equals("TRUE")) {
+                Customer customer = new Customer(request.getParameter("customerEmail"));
+                HttpSession sess = request.getSession();
+                sess.setAttribute("customer", customer);
+                RequestDispatcher rd = request.getRequestDispatcher("CustomerAppointments.jsp");
+                rd.forward(request, response);
+            } else {
+                Employee employee = new Employee(request.getParameter("currentEmployeeID"));
+                HttpSession sess = request.getSession();
+                sess.setAttribute("employee", employee);
+                RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
+                rd.forward(request, response);
+            }
+            
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
             

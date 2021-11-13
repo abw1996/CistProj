@@ -29,6 +29,7 @@
     
     <%
        String appointmentID = request.getParameter("appointmentID");
+       String isCustomer = request.getParameter("isCustomer");
        Appointment appointment = new Appointment(appointmentID);
        Employee employeeGetter = new Employee();
         ArrayList<Employee> employees = employeeGetter.getEmployees();
@@ -43,6 +44,16 @@
             <form action="EditAppointmentServlet" method="post">
                 <input type="hidden" value="<%=appointment.getAppointmentID()%>" name="appointmentID" id="appointmentID"> 
             <input class="text-input" type="hidden" name="dateTime" id="dateTime" value="<%=appointment.getAppointmentDateTime()%>" required><br>
+            <input class="text-input" type="hidden" name="isCustomer" id="isCustomer" value="<%=isCustomer%>">
+            <%
+            if (isCustomer.equals("TRUE")) {
+                String customerEmail = request.getParameter("customerEmail");
+                %> <input class="text-input" type="hidden" name="customerEmail" id="customerEmail" value="<%=customerEmail%>"> <%
+            } else {
+                String currentEmployeeID = request.getParameter("currentEmployeeID");
+                %> <input class="text-input" type="hidden" name="currentEmployeeID" id="currentEmployeeID" value="<%=currentEmployeeID%>"> <%
+            }
+            %>
             <input class="text-input" type="hidden" name="employeeID" id="employeeID" value="<%=appointment.getEmployeeID()%>" required>
             <label class="hire-form-text">Service</label> <br>
             <select class="text-input" type="text" name="procedureID" id="procedureID" required>

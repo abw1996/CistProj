@@ -36,7 +36,7 @@ public class EditEmployeeServlet extends HttpServlet {
         
         Employee employee = new Employee(employeeID);
         employee.updateDB(employeeID, firstName, lastName, phoneNumber, password, adminAccess);
-        employee = new Employee(employeeID);
+        employee = new Employee(request.getParameter("currentEmployeeID"));
         HttpSession sess = request.getSession();
         sess.setAttribute("employee", employee);
         RequestDispatcher rd = request.getRequestDispatcher("EmployeeAppointments.jsp");
